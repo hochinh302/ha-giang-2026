@@ -212,6 +212,28 @@ body{font-family:Tahoma,Arial,sans-serif;background:var(--bg);color:var(--text);
 .m-del:hover{color:var(--terra)}
 .no-members{color:var(--text3);font-size:14px;padding:20px;text-align:center}
 
+/* ── VOTE LỊCH ── */
+.vote-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;margin-top:20px}
+@media(max-width:480px){.vote-grid{grid-template-columns:1fr}}
+.vote-card{background:var(--card);border:2px solid var(--border);border-radius:var(--r);padding:18px 16px;cursor:pointer;transition:border-color .2s,box-shadow .2s;position:relative;text-align:center}
+.vote-card:hover{border-color:var(--forest);box-shadow:0 2px 12px rgba(74,111,76,.15)}
+.vote-card.voted{border-color:var(--forest);background:linear-gradient(135deg,#f0f7ee,#fff)}
+.vote-card.is-plan{border-color:var(--amber)}
+.vote-tag{position:absolute;top:10px;right:10px;font-size:10px;font-weight:bold;background:var(--amber);color:#fff;border-radius:8px;padding:2px 7px;letter-spacing:.4px}
+.vote-wday{font-size:11px;color:var(--text3);font-weight:bold;letter-spacing:.6px;margin-bottom:4px}
+.vote-date{font-size:20px;font-weight:bold;color:var(--text1);line-height:1.2}
+.vote-range{font-size:12px;color:var(--text3);margin-top:2px}
+.vote-bar-wrap{margin-top:14px;background:var(--stone);border-radius:20px;height:6px;overflow:hidden}
+.vote-bar{height:6px;background:var(--forest);border-radius:20px;transition:width .4s}
+.vote-count{margin-top:8px;font-size:12px;color:var(--text2);font-weight:bold}
+.vote-names{margin-top:6px;font-size:11px;color:var(--text3);min-height:16px;line-height:1.5}
+.vote-input-row{display:flex;gap:10px;margin-top:20px;align-items:flex-end;flex-wrap:wrap}
+.vote-input-row input{flex:1;min-width:140px;padding:10px 14px;border:1.5px solid var(--border);border-radius:var(--r);font-size:14px;font-family:inherit;background:var(--stone);color:var(--text1)}
+.vote-input-row input:focus{outline:none;border-color:var(--forest)}
+.vote-submit{background:var(--forest);color:#fff;border:none;border-radius:var(--r);padding:10px 22px;font-size:14px;font-weight:bold;cursor:pointer;white-space:nowrap;font-family:inherit;transition:opacity .15s}
+.vote-submit:hover{opacity:.88}
+.vote-hint{font-size:12px;color:var(--text3);margin-top:8px}
+
 /* ── CHECKLIST ── */
 .cl-prog-wrap{margin-bottom:28px}
 .cl-prog-txt{font-size:13px;color:var(--text2);margin-bottom:8px}
@@ -265,23 +287,112 @@ footer a{color:var(--amber-lt);text-decoration:none}
 footer p{margin-bottom:5px}
 footer hr{opacity:.15;margin:16px auto;max-width:80px;border:none;border-top:1px solid #fff}
 
-@media(max-width:480px){.wrap{padding:52px 16px}.day-banner .bignum{display:none}}
+/* ── MOBILE OVERLAY MENU ── */
+#mob-menu{
+  display:none;
+  position:fixed;top:52px;left:0;right:0;bottom:0;
+  z-index:9999;
+  background:rgba(255,255,255,.98);
+  backdrop-filter:blur(16px);
+  flex-direction:column;
+  gap:4px;padding:16px;
+  overflow-y:auto;
+  border-top:1px solid var(--border);
+}
+#mob-menu.open{display:flex}
+#mob-menu a{
+  display:block;font-size:17px;font-weight:bold;
+  color:var(--text2);text-decoration:none;
+  padding:15px 18px;border-radius:10px;
+  border:1px solid transparent;
+  transition:background .15s,color .15s;
+}
+#mob-menu a:hover,#mob-menu a.active{background:var(--forest);color:#fff}
+
+/* ── HAMBURGER BUTTON ── */
+#nav-toggle{display:none;flex-direction:column;justify-content:center;gap:5px;background:none;border:none;cursor:pointer;padding:6px 4px;margin-left:auto;flex-shrink:0}
+#nav-toggle span{display:block;width:22px;height:2px;background:var(--forest);border-radius:2px;transition:transform .25s,opacity .25s}
+#nav-toggle.open span:nth-child(1){transform:translateY(7px) rotate(45deg)}
+#nav-toggle.open span:nth-child(2){opacity:0}
+#nav-toggle.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
+.nav-logo{display:none;font-size:14px;font-weight:bold;color:var(--forest);letter-spacing:-.3px;white-space:nowrap}
+
+/* ── COMBO BODY ── */
+.combo-body{padding:18px 20px;display:grid;grid-template-columns:1fr 1fr;gap:20px}
+
+/* ── MOBILE ── */
+@media(max-width:680px){
+  /* Nav: hamburger */
+  #nav{justify-content:space-between;padding:0 16px}
+  .nav-logo{display:block}
+  #nav-toggle{display:flex}
+  .nav-inner{display:none !important}
+
+  /* Layout */
+  .wrap{padding:52px 16px}
+  .day-banner .bignum{display:none}
+  .day-banner{padding:16px}
+  .day-tab{padding:7px 14px;font-size:12px}
+
+  /* Combo 2-col → 1-col */
+  .combo-body{grid-template-columns:1fr}
+
+  /* Cost total */
+  .cost-total{flex-direction:column;align-items:flex-start;gap:6px}
+  .cost-total .tl-price{font-size:24px}
+
+  /* Member item */
+  .member-item{flex-wrap:wrap}
+  .m-del{margin-left:auto}
+
+  /* Hero countdown */
+  .cd{gap:7px}
+  .cd-box{padding:10px 10px;min-width:58px}
+
+  /* Vote grid always 2-col on mobile (compact) */
+  .vote-grid{gap:10px}
+  .vote-card{padding:14px 12px}
+  .vote-date{font-size:17px}
+
+  /* Notes cols already has 580px breakpoint */
+}
+
+@media(max-width:400px){
+  .cd{gap:5px}
+  .cd-box{min-width:50px;padding:8px 6px}
+  .vote-grid{grid-template-columns:1fr}
+}
 </style>
 </head>
 <body>
 
 <!-- NAV -->
 <nav id="nav">
-  <div class="nav-inner">
-    <a href="#overview" data-sec="overview">Tổng quan</a>
+  <div class="nav-logo">Hà Giang 2026</div>
+  <div class="nav-inner" id="nav-inner">
+    <a href="#overview"  data-sec="overview">Tổng quan</a>
     <a href="#itinerary" data-sec="itinerary">Lịch trình</a>
-    <a href="#cost" data-sec="cost">Chi phí</a>
-    <a href="#register" data-sec="register">Đăng ký</a>
+    <a href="#cost"      data-sec="cost">Chi phí</a>
+    <a href="#register"  data-sec="register">Đăng ký</a>
     <a href="#checklist" data-sec="checklist">Chuẩn bị</a>
-    <a href="#notes" data-sec="notes">Lưu ý</a>
-    <a href="#comments" data-sec="comments">Góp ý</a>
+    <a href="#notes"     data-sec="notes">Lưu ý</a>
+    <a href="#comments"  data-sec="comments">Góp ý</a>
   </div>
+  <button id="nav-toggle" onclick="toggleNav()" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
 </nav>
+
+<!-- MOBILE MENU OVERLAY (ngoài nav để tránh stacking context của backdrop-filter) -->
+<div id="mob-menu">
+  <a href="#overview"  data-sec="overview"  onclick="closeNav()">Tổng quan</a>
+  <a href="#itinerary" data-sec="itinerary" onclick="closeNav()">Lịch trình</a>
+  <a href="#cost"      data-sec="cost"      onclick="closeNav()">Chi phí</a>
+  <a href="#register"  data-sec="register"  onclick="closeNav()">Đăng ký</a>
+  <a href="#checklist" data-sec="checklist" onclick="closeNav()">Chuẩn bị</a>
+  <a href="#notes"     data-sec="notes"     onclick="closeNav()">Lưu ý</a>
+  <a href="#comments"  data-sec="comments"  onclick="closeNav()">Góp ý</a>
+</div>
 
 <!-- HERO -->
 <section id="hero">
@@ -409,7 +520,7 @@ footer hr{opacity:.15;margin:16px auto;max-width:80px;border:none;border-top:1px
         </div>
 
         <!-- Body: 2 cols -->
-        <div style="padding:18px 20px;display:grid;grid-template-columns:1fr 1fr;gap:20px">
+        <div class="combo-body">
 
           <!-- Left: bao gồm -->
           <div>
@@ -967,6 +1078,26 @@ footer hr{opacity:.15;margin:16px auto;max-width:80px;border:none;border-top:1px
   </div>
 </div>
 
+<!-- VOTE LỊCH -->
+<div class="wrap" id="vote">
+  <div class="s-label">Vote lịch</div>
+  <div class="s-title">Chốt ngày đi — mọi người vote nhé</div>
+  <p style="color:var(--text2);font-size:14px;margin-bottom:4px">Di chuyển <strong>T7 → T2</strong> · Cuối tháng 9 – đầu tháng 10. Chọn khung bạn rảnh rồi nhấn <em>Xác nhận vote</em>.</p>
+
+  <div class="vote-grid" id="vote-grid">
+    <!-- JS render -->
+  </div>
+
+  <div class="vote-input-row">
+    <select id="vote-name" style="flex:1;padding:10px 14px;border:1.5px solid var(--border);border-radius:var(--r);font-size:14px;font-family:inherit;background:var(--stone);color:var(--text);appearance:none;-webkit-appearance:none;background-image:url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%239a8c70' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E\");background-repeat:no-repeat;background-position:right 14px center;padding-right:36px">
+      <option value="">— Chọn tên của bạn —</option>
+    </select>
+    <button class="vote-submit" onclick="submitVote()">Xác nhận vote</button>
+  </div>
+  <div id="vote-err" class="vote-hint" style="color:var(--terra)"></div>
+  <div class="vote-hint" id="vote-hint">Nhấn vào ô ngày để chọn, có thể chọn nhiều khung.</div>
+</div>
+
 <!-- CHECKLIST -->
 <div class="wrap" id="checklist">
   <div class="s-label">Chuẩn bị</div>
@@ -1093,6 +1224,7 @@ if (FB_READY) {
     REF.members  = db.ref('hagiang_2026/members');
     REF.comments = db.ref('hagiang_2026/comments');
     REF.mapLinks = db.ref('hagiang_2026/mapLinks');
+    REF.votes    = db.ref('hagiang_2026/votes');
   } catch(e) {
     console.error('Firebase init error:', e);
     FB_READY = false;
@@ -1131,15 +1263,15 @@ function fmtTime(){
 
 // ── NAV SCROLL SPY ──
 (function(){
-  var secs=['overview','itinerary','cost','register','checklist','notes','comments'];
-  var links=document.querySelectorAll('.nav-inner a[data-sec]');
+  var secs=['overview','itinerary','cost','register','vote','checklist','notes','comments'];
+  var allLinks=document.querySelectorAll('.nav-inner a[data-sec], #mob-menu a[data-sec]');
   function update(){
     var cur='';
     secs.forEach(function(id){
       var el=document.getElementById(id);
       if(el&&el.getBoundingClientRect().top<=100)cur=id;
     });
-    links.forEach(function(a){a.classList.toggle('active',a.getAttribute('data-sec')===cur);});
+    allLinks.forEach(function(a){a.classList.toggle('active',a.getAttribute('data-sec')===cur);});
   }
   window.addEventListener('scroll',update,{passive:true});
   update();
@@ -1232,6 +1364,21 @@ function updateCl() {
 
 // Cache snapshot data toàn cục để dùng cho dropdown + bike pairs
 var membersCache = {}; // { firebaseKey: memberObj }
+
+// Cập nhật dropdown tên vote từ danh sách thành viên
+function updateVoteNameSelect(data) {
+  var sel = document.getElementById('vote-name');
+  if (!sel) return;
+  var prev = sel.value;
+  sel.innerHTML = '<option value="">— Chọn tên của bạn —</option>';
+  Object.values(data || {}).forEach(function(m) {
+    var opt = document.createElement('option');
+    opt.value = m.name;
+    opt.textContent = m.name;
+    sel.appendChild(opt);
+  });
+  if (prev) sel.value = prev;
+}
 
 // Cập nhật dropdown "Ghép xe với" khi danh sách thành viên thay đổi
 function updatePairDropdown(data) {
@@ -1343,6 +1490,7 @@ function renderMembersFromSnap(snap) {
   membersCache = data || {};
 
   updatePairDropdown(data);
+  updateVoteNameSelect(data);
   items.innerHTML = '';
 
   if (!data) {
@@ -1372,6 +1520,7 @@ function renderMembersLocal() {
   var fakeData = {};
   list.forEach(function(m, i) { fakeData['local_' + i] = m; });
   updatePairDropdown(fakeData);
+  updateVoteNameSelect(fakeData);
 
   if (!list.length) { noEl.style.display = 'block'; renderBikePairs(null); return; }
   noEl.style.display = 'none';
@@ -1516,6 +1665,136 @@ if (FB_READY) {
   REF.comments.on('value', function(snap) { renderCommentsFromSnap(snap); });
 } else {
   renderCommentsLocal();
+}
+
+// ════════════════════════════════════════════════════
+//  VOTE LỊCH
+// ════════════════════════════════════════════════════
+
+var VOTE_OPTIONS = [
+  { key: 'sep19', wday: 'T7 → T2', date: '19 – 21/9', range: 'Tháng 9 · 2026' },
+  { key: 'sep26', wday: 'T7 → T2', date: '26 – 28/9', range: 'Tháng 9 · 2026', plan: true },
+  { key: 'oct03', wday: 'T7 → T2', date: '3 – 5/10',  range: 'Tháng 10 · 2026' },
+  { key: 'oct10', wday: 'T7 → T2', date: '10 – 12/10',range: 'Tháng 10 · 2026' }
+];
+
+var voteData    = {};   // { sep20: {name1:true, name2:true}, ... }
+var voteSelected= {};   // local toggle { sep20: true/false }
+var voteSaved   = {};   // lần vote trước của user hiện tại (theo tên)
+
+function initVoteGrid() {
+  var grid = document.getElementById('vote-grid');
+  grid.innerHTML = '';
+  VOTE_OPTIONS.forEach(function(opt) {
+    var card = document.createElement('div');
+    card.className = 'vote-card' + (opt.plan ? ' is-plan' : '');
+    card.id = 'vcard-' + opt.key;
+    card.onclick = function() { toggleVoteCard(opt.key); };
+    card.innerHTML =
+      (opt.plan ? '<div class="vote-tag">DỰ KIẾN</div>' : '') +
+      '<div class="vote-wday">' + opt.wday + '</div>' +
+      '<div class="vote-date">' + opt.date + '</div>' +
+      '<div class="vote-range">' + opt.range + '</div>' +
+      '<div class="vote-bar-wrap"><div class="vote-bar" id="vbar-' + opt.key + '" style="width:0%"></div></div>' +
+      '<div class="vote-count" id="vcnt-' + opt.key + '">0 người</div>' +
+      '<div class="vote-names" id="vnames-' + opt.key + '"></div>';
+    grid.appendChild(card);
+  });
+}
+
+function toggleVoteCard(key) {
+  voteSelected[key] = !voteSelected[key];
+  var card = document.getElementById('vcard-' + key);
+  if (voteSelected[key]) card.classList.add('voted');
+  else card.classList.remove('voted');
+}
+
+function updateVoteUI(data) {
+  var maxVotes = 1;
+  VOTE_OPTIONS.forEach(function(opt) {
+    var voters = data[opt.key] ? Object.keys(data[opt.key]) : [];
+    if (voters.length > maxVotes) maxVotes = voters.length;
+  });
+  VOTE_OPTIONS.forEach(function(opt) {
+    var voters = data[opt.key] ? Object.values(data[opt.key]) : [];
+    var n = voters.length;
+    var bar = document.getElementById('vbar-' + opt.key);
+    var cnt = document.getElementById('vcnt-' + opt.key);
+    var names = document.getElementById('vnames-' + opt.key);
+    if (bar)   bar.style.width = (maxVotes ? Math.round(n / maxVotes * 100) : 0) + '%';
+    if (cnt)   cnt.textContent = n + ' người';
+    if (names) names.textContent = voters.join(' · ');
+  });
+}
+
+function submitVote() {
+  var name = document.getElementById('vote-name').value.trim();
+  var err  = document.getElementById('vote-err');
+  if (!name) { err.textContent = 'Nhập tên trước nhé!'; return; }
+  var hasChoice = VOTE_OPTIONS.some(function(o) { return voteSelected[o.key]; });
+  if (!hasChoice) { err.textContent = 'Chọn ít nhất 1 khung thời gian.'; return; }
+  err.textContent = '';
+
+  var safeKey = name.replace(/[.#$/\[\]]/g, '_');
+
+  if (FB_READY) {
+    var updates = {};
+    VOTE_OPTIONS.forEach(function(opt) {
+      updates['hagiang_2026/votes/' + opt.key + '/' + safeKey] =
+        voteSelected[opt.key] ? name : null;
+    });
+    firebase.database().ref().update(updates).then(function() {
+      document.getElementById('vote-hint').textContent = 'Vote của ' + name + ' đã được lưu!';
+    }).catch(function(e) { err.textContent = 'Lỗi: ' + e.message; });
+  } else {
+    // localStorage fallback
+    var lv = {};
+    try { lv = JSON.parse(localStorage.getItem('hg_votes_2026')) || {}; } catch(e) {}
+    VOTE_OPTIONS.forEach(function(opt) {
+      if (!lv[opt.key]) lv[opt.key] = {};
+      if (voteSelected[opt.key]) lv[opt.key][safeKey] = name;
+      else delete lv[opt.key][safeKey];
+    });
+    try { localStorage.setItem('hg_votes_2026', JSON.stringify(lv)); } catch(e) {}
+    updateVoteUI(lv);
+    document.getElementById('vote-hint').textContent = 'Vote của ' + name + ' đã được lưu!';
+  }
+}
+
+// ════════════════════════════════════════════════════
+//  HAMBURGER NAV
+// ════════════════════════════════════════════════════
+function toggleNav() {
+  var menu = document.getElementById('mob-menu');
+  var btn  = document.getElementById('nav-toggle');
+  var open = menu.classList.toggle('open');
+  btn.classList.toggle('open', open);
+  document.body.style.overflow = open ? 'hidden' : '';
+}
+function closeNav() {
+  var menu = document.getElementById('mob-menu');
+  var btn  = document.getElementById('nav-toggle');
+  menu.classList.remove('open');
+  btn.classList.remove('open');
+  document.body.style.overflow = '';
+}
+document.addEventListener('click', function(e) {
+  var nav  = document.getElementById('nav');
+  var menu = document.getElementById('mob-menu');
+  if (!nav.contains(e.target) && !menu.contains(e.target)) closeNav();
+});
+
+initVoteGrid();
+
+if (FB_READY) {
+  REF.votes.on('value', function(snap) {
+    voteData = snap.val() || {};
+    updateVoteUI(voteData);
+  });
+} else {
+  var lv = {};
+  try { lv = JSON.parse(localStorage.getItem('hg_votes_2026')) || {}; } catch(e) {}
+  updateVoteUI(lv);
 }
 </script>
 </body>
