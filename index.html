@@ -1,0 +1,1383 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Hà Giang 3N2D — Mùa Lúa Chín 2026</title>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#faf7f1;
+  --card:#fff;
+  --forest:#2d4a1e;
+  --green:#4a7a35;
+  --sage:#7db85a;
+  --amber:#c8901a;
+  --amber-lt:#e8b84a;
+  --terra:#b5632a;
+  --text:#1e1a10;
+  --text2:#5a5038;
+  --text3:#9a8c70;
+  --border:#e2d9c8;
+  --stone:#f2ece0;
+  --sh:0 2px 12px rgba(0,0,0,.08);
+  --r:10px
+}
+html{scroll-behavior:smooth}
+body{font-family:Tahoma,Arial,sans-serif;background:var(--bg);color:var(--text);line-height:1.65;font-size:15px}
+
+/* ── NAV ── */
+#nav{
+  position:fixed;top:0;left:0;right:0;z-index:200;
+  background:rgba(255,255,255,.97);
+  border-bottom:1px solid var(--border);
+  backdrop-filter:blur(12px);
+  height:52px;
+  display:flex;align-items:center;justify-content:center;
+  padding:0 20px;
+}
+.nav-inner{
+  display:flex;align-items:center;gap:2px;
+  max-width:860px;width:100%;justify-content:center;
+  overflow-x:auto;scrollbar-width:none;
+}
+.nav-inner::-webkit-scrollbar{display:none}
+.nav-inner a{
+  color:var(--text2);text-decoration:none;
+  font-size:13px;white-space:nowrap;
+  padding:6px 13px;border-radius:6px;
+  transition:background .15s,color .15s;
+  flex-shrink:0;
+}
+.nav-inner a:hover{background:var(--stone);color:var(--forest)}
+.nav-inner a.active{background:var(--forest);color:#fff}
+
+/* ── HERO ── */
+#hero{
+  min-height:100svh;
+  background:
+    linear-gradient(to bottom,rgba(5,15,3,.5) 0%,rgba(10,22,6,.2) 55%,rgba(15,30,8,.78) 100%),
+    url('https://vietsensetravel.com/nview/at_kinh-nghiem-du-lich-ha-giang_efdb3fd7b331fd1a7a1c32ad639e2740.jpg') center/cover no-repeat;
+  display:flex;flex-direction:column;
+  align-items:center;justify-content:center;
+  text-align:center;padding:80px 24px 60px;
+  position:relative;
+}
+.h-eye{font-size:11px;letter-spacing:2.5px;text-transform:uppercase;color:rgba(255,255,255,.6);margin-bottom:18px}
+#hero h1{
+  font-size:clamp(34px,8vw,66px);
+  color:#fff;font-weight:bold;line-height:1.12;
+  margin-bottom:14px;letter-spacing:-1px;
+  text-shadow:0 2px 28px rgba(0,0,0,.45)
+}
+#hero h1 em{font-style:normal;color:var(--amber-lt)}
+.h-sub{color:rgba(255,255,255,.8);font-size:15px;margin-bottom:48px}
+.cd{display:flex;gap:10px;justify-content:center}
+.cd-box{background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.22);backdrop-filter:blur(6px);border-radius:8px;padding:12px 16px;min-width:68px;text-align:center}
+.cd-n{display:block;font-size:clamp(24px,5vw,42px);font-weight:bold;color:#fff;line-height:1}
+.cd-l{display:block;font-size:10px;color:rgba(255,255,255,.5);margin-top:4px;letter-spacing:1.5px}
+.h-scroll{position:absolute;bottom:26px;left:50%;transform:translateX(-50%);color:rgba(255,255,255,.4);font-size:11px;letter-spacing:1px;display:flex;flex-direction:column;align-items:center;gap:5px}
+.h-scroll span{animation:bob 2s ease-in-out infinite;font-size:20px}
+@keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(7px)}}
+
+/* ── WRAP ── */
+.wrap{max-width:860px;margin:0 auto;padding:72px 24px}
+.s-label{font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--amber);margin-bottom:8px;font-weight:bold}
+.s-title{font-size:clamp(22px,4vw,30px);font-weight:bold;color:var(--forest);margin-bottom:6px;letter-spacing:-.5px}
+.s-sub{color:var(--text3);font-size:14px;margin-bottom:40px}
+
+/* ── OVERVIEW ── */
+.ov-intro{
+  background:linear-gradient(135deg,#eef7e8,#fffbf0);
+  border:1px solid var(--border);border-radius:var(--r);
+  padding:22px 24px;margin-bottom:36px;
+}
+.ov-intro p{color:var(--text2);font-size:14px;line-height:1.75}
+.ov-intro strong{color:var(--forest)}
+
+.highlights{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:14px;margin-bottom:40px}
+.hl-card{
+  background:var(--card);border:1px solid var(--border);
+  border-radius:var(--r);padding:18px 20px;
+  border-left:3px solid var(--sage);
+  box-shadow:var(--sh);transition:transform .2s,box-shadow .2s;
+}
+.hl-card:hover{transform:translateY(-3px);box-shadow:0 6px 20px rgba(0,0,0,.12)}
+.hl-card.amber{border-left-color:var(--amber)}
+.hl-icon{font-size:24px;margin-bottom:8px}
+.hl-name{font-size:14px;font-weight:bold;color:var(--forest);margin-bottom:4px}
+.hl-desc{font-size:13px;color:var(--text2);line-height:1.55}
+.hl-tag{display:inline-block;background:rgba(200,144,26,.12);color:var(--amber);border-radius:10px;padding:1px 8px;font-size:11px;margin-top:6px;font-weight:bold}
+
+/* roadmap */
+.roadmap-title{font-size:14px;font-weight:bold;color:var(--text2);margin-bottom:16px;letter-spacing:.5px;text-transform:uppercase;border-bottom:1px solid var(--border);padding-bottom:8px}
+.roadmap{position:relative;padding-left:28px}
+.roadmap::before{content:'';position:absolute;left:9px;top:4px;bottom:4px;width:2px;background:linear-gradient(to bottom,var(--sage),var(--amber-lt),var(--sage));border-radius:2px}
+.rm{position:relative;margin-bottom:14px;background:var(--card);border:1px solid var(--border);border-radius:var(--r);padding:14px 16px;box-shadow:var(--sh)}
+.rm::before{content:'';position:absolute;left:-24px;top:20px;width:14px;height:14px;border-radius:50%;background:var(--card);border:3px solid var(--sage);box-shadow:0 0 0 2px var(--sage)}
+.rm.key::before{border-color:var(--amber);box-shadow:0 0 0 2px var(--amber)}
+.rm-day{font-size:11px;font-weight:bold;color:var(--amber);letter-spacing:.5px;margin-bottom:4px}
+.rm-title{font-size:14px;font-weight:bold;color:var(--forest);margin-bottom:3px}
+.rm-body{font-size:13px;color:var(--text2);line-height:1.55}
+
+/* ── TIMELINE ── */
+.day-tabs{display:flex;gap:6px;margin-bottom:28px;flex-wrap:wrap}
+.day-tab{padding:8px 18px;border:1.5px solid var(--border);border-radius:24px;background:var(--card);color:var(--text2);font-family:Tahoma,sans-serif;font-size:13px;cursor:pointer;transition:all .2s;font-weight:bold}
+.day-tab.on{background:var(--forest);color:#fff;border-color:var(--forest);box-shadow:0 3px 12px rgba(45,74,30,.3)}
+.day-tab:hover:not(.on){border-color:var(--green);color:var(--forest)}
+.day-panel{display:none;animation:fu .25s ease}
+.day-panel.on{display:block}
+@keyframes fu{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+
+.day-banner{background:linear-gradient(135deg,var(--forest) 0%,var(--green) 100%);color:#fff;border-radius:var(--r);padding:18px 22px;margin-bottom:24px;display:flex;align-items:center;gap:16px}
+.day-banner .bignum{font-size:52px;font-weight:bold;opacity:.18;line-height:1;flex-shrink:0}
+.day-banner h3{font-size:17px;margin-bottom:3px}
+.day-banner p{font-size:13px;opacity:.8}
+
+.tl{padding-left:32px;position:relative}
+.tl::before{content:'';position:absolute;left:10px;top:4px;bottom:4px;width:2px;background:linear-gradient(to bottom,var(--sage) 0%,var(--amber-lt) 50%,var(--sage) 100%);border-radius:2px}
+.ti{position:relative;margin-bottom:14px;background:var(--card);border:1px solid var(--border);border-radius:var(--r);overflow:hidden}
+.ti::before{content:'';position:absolute;left:-27px;top:20px;width:14px;height:14px;border-radius:50%;background:var(--sage);border:3px solid var(--bg);box-shadow:0 0 0 2px var(--sage)}
+.ti.star::before{background:var(--amber);box-shadow:0 0 0 2px var(--amber)}
+.ti-main{padding:14px 16px}
+.ti-time{font-size:11px;font-weight:bold;letter-spacing:.5px;color:var(--amber);margin-bottom:5px}
+.ti-act{font-size:15px;font-weight:bold;color:var(--text);margin-bottom:3px}
+.ti-place{font-size:13px;color:var(--text3);display:flex;align-items:center;gap:4px}
+.ti-place::before{content:'▸';color:var(--sage);font-size:10px}
+.ti-desc{font-size:13px;color:var(--text2);margin-top:6px;line-height:1.55;background:var(--stone);border-radius:6px;padding:7px 10px}
+.ti-note{margin-top:7px;background:#fffbf0;border-left:3px solid var(--amber-lt);padding:7px 10px;font-size:12px;color:var(--text2);display:flex;gap:6px}
+.ti-note::before{content:'!';flex-shrink:0;font-weight:bold;color:var(--amber)}
+.map-btn{display:inline-flex;align-items:center;gap:4px;margin-top:10px;font-size:12px;color:var(--green);text-decoration:none;border:1px solid var(--sage);border-radius:14px;padding:3px 11px;transition:background .15s;font-family:Tahoma,sans-serif}
+.map-btn:hover{background:var(--sage);color:#fff}
+
+/* map input zone */
+.map-input-zone{padding:10px 14px 12px;border-top:1px dashed var(--border);background:var(--stone);display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.map-input-zone label{font-size:11px;color:var(--text3);white-space:nowrap;flex-shrink:0}
+.map-input-zone input{flex:1;min-width:180px;font-family:Tahoma,sans-serif;font-size:12px;border:1px solid var(--border);border-radius:6px;padding:5px 9px;background:var(--card);color:var(--text);outline:none;transition:border-color .15s}
+.map-input-zone input:focus{border-color:var(--green)}
+.map-input-zone .go-map{padding:5px 11px;background:var(--green);color:#fff;border:none;border-radius:6px;font-size:12px;cursor:pointer;font-family:Tahoma,sans-serif;white-space:nowrap}
+.map-input-zone .go-map:hover{background:var(--forest)}
+
+/* ── COST ── */
+.cost-tag{display:inline-block;background:linear-gradient(135deg,#eef7e8,#fffbf0);border:1px solid var(--border);border-radius:var(--r);padding:16px 20px;margin-bottom:24px}
+.cost-tag .big{font-size:28px;font-weight:bold;color:var(--forest)}
+.cost-tag p{font-size:13px;color:var(--text2);margin-top:4px}
+.cost-rows{display:flex;flex-direction:column;gap:10px}
+.cost-row{background:var(--card);border:1px solid var(--border);border-radius:var(--r);padding:14px 18px;display:flex;justify-content:space-between;align-items:flex-start;gap:12px}
+.cost-row.combo{border-left:4px solid var(--forest)}
+.cr-left .cr-name{font-size:15px;font-weight:bold;color:var(--text)}
+.cr-left .cr-desc{font-size:12px;color:var(--text3);margin-top:3px}
+.cr-price{font-size:16px;font-weight:bold;color:var(--forest);white-space:nowrap;text-align:right;flex-shrink:0}
+.cr-price.tbd{font-size:13px;color:var(--text3);font-weight:normal;font-style:italic}
+.cost-total{background:var(--forest);border-radius:var(--r);padding:16px 20px;margin-top:14px;display:flex;justify-content:space-between;align-items:center;color:#fff}
+.cost-total .tl-label{font-size:13px;opacity:.85}
+.cost-total .tl-price{font-size:20px;font-weight:bold}
+
+/* ── REGISTRATION ── */
+.reg-form-box{background:var(--card);border:1px solid var(--border);border-radius:var(--r);padding:24px;margin-bottom:28px}
+.reg-form-box h3{font-size:15px;font-weight:bold;color:var(--forest);margin-bottom:18px}
+.reg-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+@media(max-width:520px){.reg-grid{grid-template-columns:1fr}}
+.fg{display:flex;flex-direction:column;gap:5px}
+.fg label{font-size:12px;color:var(--text3);font-weight:bold;letter-spacing:.3px}
+.fg input,.fg select,.fg textarea{font-family:Tahoma,sans-serif;font-size:14px;border:1px solid var(--border);border-radius:6px;padding:8px 12px;background:var(--bg);color:var(--text);outline:none;transition:border-color .15s;width:100%}
+.fg input:focus,.fg select:focus,.fg textarea:focus{border-color:var(--green)}
+.fg.full{grid-column:1/-1}
+.radio-row{display:flex;gap:16px;align-items:center;padding:8px 0}
+.radio-row label{display:flex;align-items:center;gap:6px;cursor:pointer;font-size:14px;color:var(--text2);font-weight:normal;letter-spacing:0}
+.radio-row input[type=radio]{width:auto}
+.reg-submit{background:var(--forest);color:#fff;border:none;border-radius:6px;padding:10px 26px;font-family:Tahoma,sans-serif;font-size:14px;font-weight:bold;cursor:pointer;transition:background .15s;margin-top:16px}
+.reg-submit:hover{background:var(--green)}
+
+.members-list{display:flex;flex-direction:column;gap:8px}
+.member-item{background:var(--card);border:1px solid var(--border);border-radius:var(--r);padding:12px 18px;display:flex;align-items:center;gap:14px}
+.m-num{width:28px;height:28px;border-radius:50%;background:var(--forest);color:#fff;font-size:13px;font-weight:bold;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.m-name{font-size:14px;font-weight:bold;color:var(--forest)}
+.m-info{font-size:12px;color:var(--text3);margin-top:2px}
+.m-badge{display:inline-block;border-radius:10px;padding:2px 8px;font-size:11px;font-weight:bold;margin-left:6px}
+.badge-ok{background:#e8f5e0;color:#3a7020}
+.badge-no{background:#fef0e0;color:#a06020}
+.m-del{margin-left:auto;background:none;border:none;color:var(--text3);cursor:pointer;font-size:16px;padding:4px 6px;border-radius:4px;transition:color .15s}
+.m-del:hover{color:var(--terra)}
+.no-members{color:var(--text3);font-size:14px;padding:20px;text-align:center}
+
+/* ── CHECKLIST ── */
+.cl-prog-wrap{margin-bottom:28px}
+.cl-prog-txt{font-size:13px;color:var(--text2);margin-bottom:8px}
+.cl-bar-bg{height:5px;background:var(--border);border-radius:4px;overflow:hidden}
+.cl-bar{height:100%;background:linear-gradient(to right,var(--sage),var(--amber-lt));border-radius:4px;transition:width .4s}
+.cl-sec{margin-bottom:24px}
+.cl-sec-title{font-size:12px;font-weight:bold;color:var(--text2);text-transform:uppercase;letter-spacing:1px;margin-bottom:10px;padding-bottom:6px;border-bottom:1px solid var(--border)}
+.cl-item{display:flex;align-items:flex-start;gap:12px;padding:10px 14px;border-radius:8px;margin-bottom:6px;cursor:pointer;transition:background .15s;user-select:none;background:var(--card);border:1px solid var(--border)}
+.cl-item:hover{background:var(--stone)}
+.cl-item.done{opacity:.5}
+.cl-item.done .cl-tx{text-decoration:line-through}
+.cl-box{width:18px;height:18px;border-radius:4px;border:2px solid var(--border);flex-shrink:0;margin-top:1px;display:flex;align-items:center;justify-content:center;font-size:11px;color:#fff;transition:all .15s;background:transparent}
+.cl-item.done .cl-box{background:var(--green);border-color:var(--green)}
+.cl-item.done .cl-box::after{content:'✓'}
+.cl-tx{font-size:14px;color:var(--text)}
+.cl-hint{font-size:12px;color:var(--text3);margin-top:1px}
+
+/* ── NOTES ── */
+.notes-cols{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+@media(max-width:580px){.notes-cols{grid-template-columns:1fr}}
+.note-block{background:var(--card);border:1px solid var(--border);border-radius:var(--r);padding:20px}
+.note-block h3{font-size:14px;color:var(--forest);margin-bottom:14px}
+.note-block ul{list-style:none}
+.note-block li{padding:6px 0;border-bottom:1px solid var(--stone);font-size:13px;color:var(--text2);display:flex;gap:8px;align-items:flex-start}
+.note-block li:last-child{border:none}
+.note-block li::before{content:'›';color:var(--amber);font-size:16px;line-height:1.3;flex-shrink:0}
+
+/* ── COMMENTS ── */
+.cf-box{background:var(--card);border:1px solid var(--border);border-radius:var(--r);padding:22px;margin-bottom:20px}
+.cf-box h3{font-size:15px;color:var(--forest);margin-bottom:14px}
+.cf-in{width:100%;font-family:Tahoma,sans-serif;font-size:14px;border:1px solid var(--border);border-radius:6px;padding:9px 13px;background:var(--bg);color:var(--text);outline:none;transition:border-color .15s;margin-bottom:10px}
+.cf-in:focus{border-color:var(--green)}
+.cf-ta{width:100%;font-family:Tahoma,sans-serif;font-size:14px;border:1px solid var(--border);border-radius:6px;padding:9px 13px;background:var(--bg);color:var(--text);outline:none;resize:vertical;min-height:75px;transition:border-color .15s}
+.cf-ta:focus{border-color:var(--green)}
+.cf-footer{display:flex;align-items:center;justify-content:space-between;margin-top:10px;flex-wrap:wrap;gap:8px}
+.btn{background:var(--forest);color:#fff;border:none;border-radius:6px;padding:9px 22px;font-family:Tahoma,sans-serif;font-size:14px;cursor:pointer;transition:background .15s;font-weight:bold}
+.btn:hover{background:var(--green)}
+.cf-err{font-size:13px;color:var(--terra)}
+.cm-list{display:flex;flex-direction:column;gap:10px}
+.cm{background:var(--card);border:1px solid var(--border);border-radius:var(--r);padding:14px 18px;display:flex;gap:12px}
+.cm-av{width:34px;height:34px;border-radius:50%;background:linear-gradient(135deg,var(--forest),var(--sage));color:#fff;font-weight:bold;font-size:14px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.cm-name{font-size:14px;font-weight:bold;color:var(--forest)}
+.cm-time{font-size:11px;color:var(--text3);margin-bottom:4px}
+.cm-text{font-size:14px;color:var(--text2)}
+.no-cm{color:var(--text3);font-size:14px;padding:20px;text-align:center}
+
+/* ── FOOTER ── */
+footer{background:var(--forest);color:rgba(255,255,255,.7);text-align:center;padding:48px 24px;font-size:13px}
+footer .f-title{font-size:18px;color:#fff;font-weight:bold;margin-bottom:8px}
+footer a{color:var(--amber-lt);text-decoration:none}
+footer p{margin-bottom:5px}
+footer hr{opacity:.15;margin:16px auto;max-width:80px;border:none;border-top:1px solid #fff}
+
+@media(max-width:480px){.wrap{padding:52px 16px}.day-banner .bignum{display:none}}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="nav">
+  <div class="nav-inner">
+    <a href="#overview" data-sec="overview">Tổng quan</a>
+    <a href="#itinerary" data-sec="itinerary">Lịch trình</a>
+    <a href="#cost" data-sec="cost">Chi phí</a>
+    <a href="#register" data-sec="register">Đăng ký</a>
+    <a href="#checklist" data-sec="checklist">Chuẩn bị</a>
+    <a href="#notes" data-sec="notes">Lưu ý</a>
+    <a href="#comments" data-sec="comments">Góp ý</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="h-eye">26 tháng 9 – 28 tháng 9 · 2026</div>
+  <h1>Hà Giang<br><em>Mùa Lúa Chín</em></h1>
+  <p class="h-sub">3 ngày · 2 đêm · Nhóm 6 người · Khởi hành từ Hà Nội đêm 25/9</p>
+  <div class="cd">
+    <div class="cd-box"><span class="cd-n" id="cdd">--</span><span class="cd-l">NGÀY</span></div>
+    <div class="cd-box"><span class="cd-n" id="cdh">--</span><span class="cd-l">GIỜ</span></div>
+    <div class="cd-box"><span class="cd-n" id="cdm">--</span><span class="cd-l">PHÚT</span></div>
+    <div class="cd-box"><span class="cd-n" id="cds">--</span><span class="cd-l">GIÂY</span></div>
+  </div>
+  <div class="h-scroll">cuộn xuống<span>↓</span></div>
+</section>
+
+<!-- OVERVIEW -->
+<div class="wrap" id="overview">
+  <div class="s-label">Tổng quan</div>
+  <div class="s-title">Hành trình của nhóm mình</div>
+  <div class="s-sub">3 ngày chậm rãi trên cao nguyên đá — không chạy đua check-in, ưu tiên trải nghiệm thật</div>
+
+  <div class="ov-intro">
+    <p>Tháng 9 là thời điểm <strong>đẹp nhất trong năm</strong> để đến Hà Giang — những thửa ruộng bậc thang chuyển từ xanh sang <strong>vàng óng ánh</strong>, trải dài theo sườn núi từ Quản Bạ lên đến Đồng Văn. Nhiệt độ dễ chịu, không còn mưa nặng hạt như tháng 7–8, đường đèo khô ráo hơn để lái xe máy. Chuyến đi của nhóm mình còn trùng vào <strong>sáng Chủ Nhật 27/9</strong> — đúng ngày họp chợ phiên Đồng Văn, một trong những phiên chợ vùng cao đặc sắc nhất miền Bắc.</p>
+  </div>
+
+  <div class="highlights">
+    <div class="hl-card amber">
+      <div class="hl-icon">🛒</div>
+      <div class="hl-name">Chợ phiên Đồng Văn</div>
+      <div class="hl-desc">Phiên chợ vùng cao họp từ sáng sớm mỗi Chủ Nhật. Đồng bào H'Mông, Lô Lô, Giấy... từ các bản xa đổ về trao đổi hàng hóa, thổ cẩm, gia súc. Chuyến mình đi đúng ngày 27/9 — dậy lúc 5h30 để không bỏ lỡ.</div>
+      <span class="hl-tag">Ngày 2 · 05:30 sáng</span>
+    </div>
+    <div class="hl-card">
+      <div class="hl-icon">🚩</div>
+      <div class="hl-name">Cột cờ Lũng Cú</div>
+      <div class="hl-desc">Điểm địa đầu Tổ quốc ở độ cao 1.700m. Leo 389 bậc đá lên đỉnh, nhìn xuống thung lũng Séo Lủng và làng Lô Lô Chải xanh mướt hai bên. Một trong những điểm check-in ý nghĩa nhất Hà Giang.</div>
+      <span class="hl-tag">Ngày 2 · 08:00 sáng</span>
+    </div>
+    <div class="hl-card">
+      <div class="hl-icon">⛵</div>
+      <div class="hl-name">Hẻm Tu Sản — Sông Nho Quế</div>
+      <div class="hl-desc">Đi thuyền luồn qua hẻm núi sâu nhất Đông Nam Á, vách đá dựng đứng hai bên xanh ngắt. Nhìn từ đỉnh Mã Pí Lèng xuống, dòng Nho Quế uốn lượn như dải ngọc bích — nhưng ngồi thuyền mới thấy hết vẻ hùng vĩ.</div>
+      <span class="hl-tag">Ngày 2 · 14:00</span>
+    </div>
+    <div class="hl-card amber">
+      <div class="hl-icon">🏔</div>
+      <div class="hl-name">Đèo Mã Pí Lèng</div>
+      <div class="hl-desc">Một trong "tứ đại đỉnh đèo" Việt Nam, dài 20km uốn theo mép vực. Đứng ở điểm nhìn trên đèo, nhìn xuống sông Nho Quế xanh thẳm phía dưới là khung cảnh không thể quên.</div>
+      <span class="hl-tag">Ngày 2 · 12:30</span>
+    </div>
+    <div class="hl-card">
+      <div class="hl-icon">🌾</div>
+      <div class="hl-name">Ruộng bậc thang mùa lúa chín</div>
+      <div class="hl-desc">Tháng 9 lúa bắt đầu chín vàng từ vùng thấp lên vùng cao. Suốt hành trình từ Quản Bạ qua Yên Minh, dọc hai bên đường là những thửa ruộng bậc thang vàng óng xen kẽ núi đá xanh — không cần đến điểm check-in cũng đẹp.</div>
+      <span class="hl-tag">Xuyên suốt · Ngày 1 & 2</span>
+    </div>
+    <div class="hl-card">
+      <div class="hl-icon">🏘</div>
+      <div class="hl-name">Phố cổ Đồng Văn — đêm thứ Bảy</div>
+      <div class="hl-desc">Phố cổ Đồng Văn được xây từ đầu thế kỷ 20, mái ngói âm dương rêu phong, đèn lồng đỏ le lói. Tối thứ Bảy là đêm đông vui nhất — người từ các bản xuống phố, tiếng khèn Mông văng vẳng, quán cà phê mở đến khuya.</div>
+      <span class="hl-tag">Ngày 1 · Tối 19:30</span>
+    </div>
+  </div>
+
+  <div class="roadmap-title">Hành trình 3 ngày</div>
+  <div class="roadmap">
+    <div class="rm key">
+      <div class="rm-day">ĐÊM 25/9 · KHỞI HÀNH</div>
+      <div class="rm-title">Lên xe giường nằm tại Hà Nội</div>
+      <div class="rm-body">Xe khởi hành khoảng 19–20h, ngủ trên xe, đến TP. Hà Giang khoảng 5–6h sáng hôm sau. Nhớ mang theo đồ ăn nhẹ và áo khoác mỏng vì điều hòa xe thường lạnh.</div>
+    </div>
+    <div class="rm key">
+      <div class="rm-day">NGÀY 1 · THỨ BẢY 26/9</div>
+      <div class="rm-title">TP. Hà Giang → Quản Bạ → Yên Minh → Sủng Là → Đồng Văn</div>
+      <div class="rm-body">Nhận xe máy buổi sáng, khởi hành từ Km0. Ghé Cổng trời Quản Bạ ngắm Núi Đôi Cô Tiên, vượt Dốc Thẩm Mã nổi tiếng, dạo làng cổ H'Mông ở Phố Cáo, ghé Cây Cô Đơn và Nhà của Pao ở Sủng Là, thăm Dinh thự Vua Mèo tại Sà Phìn. Tối check-in phố cổ Đồng Văn — nghe khèn Mông, dạo phố đêm thứ Bảy.</div>
+    </div>
+    <div class="rm key">
+      <div class="rm-day">NGÀY 2 · CHỦ NHẬT 27/9 · NGÀY CHÍNH</div>
+      <div class="rm-title">Chợ phiên → Lũng Cú → Lô Lô Chải → Mã Pí Lèng → Nho Quế → Mèo Vạc</div>
+      <div class="rm-body">Dậy 5h30 dạo chợ phiên Đồng Văn trước khi đông người. Leo Cột cờ Lũng Cú (389 bậc). Dạo bản Lô Lô Chải mua thổ cẩm, ăn trưa tại bản. Chinh phục đèo Mã Pí Lèng — một trong tứ đại đỉnh đèo. Đi thuyền hẻm Tu Sản sông Nho Quế. Về nghỉ tại Mèo Vạc trước 17h.</div>
+    </div>
+    <div class="rm">
+      <div class="rm-day">NGÀY 3 · THỨ HAI 28/9</div>
+      <div class="rm-title">Mèo Vạc → Pả Vi → Yên Minh → TP. Hà Giang → Về Hà Nội đêm</div>
+      <div class="rm-body">Ăn sáng, dạo làng văn hóa Pả Vi yên tĩnh buổi sáng sớm. Hành trình dài ~150km về TP. Hà Giang, nghỉ giải lao nhiều. Trả xe, mua đặc sản (mật ong bạc hà, chè shan tuyết). Lên xe giường nằm về Hà Nội tối 19–20h.</div>
+    </div>
+  </div>
+</div>
+
+<!-- ITINERARY -->
+<div class="wrap" id="itinerary">
+  <div class="s-label">Lịch trình</div>
+  <div class="s-title">3 ngày chi tiết</div>
+  <div class="s-sub">Bấm vào từng ngày xem chi tiết · Link bản đồ còn thiếu có thể điền thêm bên dưới mỗi địa điểm</div>
+
+  <div class="day-tabs">
+    <button class="day-tab on" onclick="switchDay(0,this)">Ngày 0 · 25/9 — Khởi hành</button>
+    <button class="day-tab" onclick="switchDay(1,this)">Ngày 1 · 26/9</button>
+    <button class="day-tab" onclick="switchDay(2,this)">Ngày 2 · 27/9</button>
+    <button class="day-tab" onclick="switchDay(3,this)">Ngày 3 · 28/9</button>
+  </div>
+
+  <!-- ── DAY 0 ── -->
+  <div class="day-panel on" id="dp0">
+    <div class="day-banner" style="background:linear-gradient(135deg,#1a2e3a 0%,#2d4a5e 100%)">
+      <div class="bignum">00</div>
+      <div><h3>Thứ Sáu, 25 tháng 9 — Đêm khởi hành</h3><p>Hà Nội · Chuẩn bị hành lý · Lên xe giường nằm đi Hà Giang</p></div>
+    </div>
+    <div class="tl">
+
+      <!-- COMBO INFO -->
+      <div style="background:var(--card);border:1px solid var(--border);border-radius:var(--r);margin-bottom:16px;overflow:hidden">
+
+        <!-- Header -->
+        <div style="background:linear-gradient(135deg,var(--forest),var(--green));padding:16px 20px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px">
+          <div>
+            <div style="font-size:10px;letter-spacing:2px;color:rgba(255,255,255,.6);margin-bottom:4px">COMBO TỰ TÚC · THAM KHẢO</div>
+            <div style="font-size:18px;font-weight:bold;color:#fff;margin-bottom:2px">Hà Giang cùng Tự</div>
+            <div style="font-size:12px;color:rgba(255,255,255,.7)">TikTok: <em>Hà Giang cùng Tự</em></div>
+          </div>
+          <div style="text-align:right;flex-shrink:0">
+            <div style="font-size:28px;font-weight:bold;color:#fff;line-height:1">1.680.000đ</div>
+            <div style="font-size:12px;color:rgba(255,255,255,.65);margin-top:3px">/ người</div>
+          </div>
+        </div>
+
+        <!-- Body: 2 cols -->
+        <div style="padding:18px 20px;display:grid;grid-template-columns:1fr 1fr;gap:20px">
+
+          <!-- Left: bao gồm -->
+          <div>
+            <div style="font-size:11px;font-weight:bold;color:var(--amber);letter-spacing:1px;margin-bottom:12px">BAO GỒM TRONG COMBO</div>
+            <ul style="list-style:none;font-size:13px;color:var(--text2);display:flex;flex-direction:column;gap:9px">
+              <li style="display:flex;gap:9px;align-items:flex-start"><span style="color:var(--sage);font-weight:bold;flex-shrink:0;margin-top:1px">✓</span><span>Xe khách <strong>Cabin đôi</strong> khứ hồi — 2 người/buồng riêng</span></li>
+              <li style="display:flex;gap:9px;align-items:flex-start"><span style="color:var(--sage);font-weight:bold;flex-shrink:0;margin-top:1px">✓</span><span>Xe Máy Wave — 2 người/xe, sử dụng 3 ngày</span></li>
+              <li style="display:flex;gap:9px;align-items:flex-start"><span style="color:var(--sage);font-weight:bold;flex-shrink:0;margin-top:1px">✓</span><span>Áo mưa bộ, mũ bảo hiểm, dây buộc đồ, bọc giày, bọc hành lý</span></li>
+              <li style="display:flex;gap:9px;align-items:flex-start"><span style="color:var(--sage);font-weight:bold;flex-shrink:0;margin-top:1px">✓</span><span>Nghỉ tạm sáng sớm tại Hà Giang — có điều hòa nóng lạnh</span></li>
+              <li style="display:flex;gap:9px;align-items:flex-start"><span style="color:var(--sage);font-weight:bold;flex-shrink:0;margin-top:1px">✓</span><span><strong>2 đêm</strong> phòng riêng, 2 người/phòng<br><span style="color:var(--text3);font-size:12px;line-height:1.7">Đêm 1: Homestay tại <strong>Đồng Văn</strong><br>Đêm 2: Homestay tại <strong>Mèo Vạc</strong></span></span></li>
+              <li style="display:flex;gap:9px;align-items:flex-start"><span style="color:var(--sage);font-weight:bold;flex-shrink:0;margin-top:1px">✓</span><span>Hỗ trợ gửi lịch trình tự túc</span></li>
+            </ul>
+          </div>
+
+          <!-- Right: đón trả + thanh toán -->
+          <div style="display:flex;flex-direction:column;gap:14px">
+            <div>
+              <div style="font-size:11px;font-weight:bold;color:var(--amber);letter-spacing:1px;margin-bottom:10px">ĐÓN & TRẢ</div>
+              <div style="font-size:13px;color:var(--text2);display:flex;flex-direction:column;gap:7px">
+                <div><span style="color:var(--text3);font-size:12px">Điểm đón HN</span><br><strong>Bến xe Mỹ Đình</strong> hoặc điểm trên lộ trình</div>
+                <div><span style="color:var(--text3);font-size:12px">Điểm trả</span><br><strong>TP. Hà Giang</strong></div>
+                <div><span style="color:var(--text3);font-size:12px">Thời gian</span><br>~9–10 tiếng · Dừng nghỉ 1 lần giữa đường</div>
+              </div>
+            </div>
+
+            <div style="background:#fffbf0;border:1px solid var(--amber-lt);border-radius:8px;padding:12px 14px">
+              <div style="font-size:11px;font-weight:bold;color:var(--amber);letter-spacing:1px;margin-bottom:10px">THANH TOÁN</div>
+              <div style="font-size:13px;color:var(--text2);display:flex;flex-direction:column;gap:8px">
+                <div style="display:flex;gap:9px;align-items:flex-start">
+                  <span style="background:var(--amber);color:#fff;border-radius:50%;width:20px;height:20px;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:bold;flex-shrink:0">1</span>
+                  <span><strong>Cọc 50%</strong> khi đặt<br><span style="color:var(--text3);font-size:12px">≈ 840.000đ / người</span></span>
+                </div>
+                <div style="display:flex;gap:9px;align-items:flex-start">
+                  <span style="background:var(--green);color:#fff;border-radius:50%;width:20px;height:20px;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:bold;flex-shrink:0">2</span>
+                  <span><strong>50% còn lại</strong> khi check-in tại <strong>Đồng Văn</strong></span>
+                </div>
+              </div>
+            </div>
+
+            <div style="background:#fef3f3;border:1px solid #f0c8c8;border-radius:8px;padding:10px 14px;font-size:12px;color:#a03030;line-height:1.55">
+              ⚠ Chưa đặt — thông tin tham khảo từ TikTok. Liên hệ xác nhận trước khi chuyển cọc.
+            </div>
+          </div>
+        </div>
+
+        <!-- Gallery ảnh/video tham khảo -->
+        <div style="border-top:1px solid var(--border);padding:16px 20px 20px">
+          <div style="font-size:11px;font-weight:bold;color:var(--amber);letter-spacing:1px;margin-bottom:12px">ẢNH / VIDEO THAM KHẢO</div>
+          <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:10px">
+
+            <div style="border-radius:8px;overflow:hidden;position:relative">
+              <img src="assets/xe-khach.jpg" alt="Xe khách Cabin đôi"
+                style="width:100%;height:140px;object-fit:cover;display:block;background:var(--stone)" />
+              <div style="padding:6px 8px;background:var(--stone);font-size:12px;color:var(--text2)">Xe khách Cabin đôi</div>
+            </div>
+
+            <div style="border-radius:8px;overflow:hidden;position:relative">
+              <img src="assets/phong-tai-dong-van.jpg" alt="Phòng tại Đồng Văn"
+                style="width:100%;height:140px;object-fit:cover;display:block;background:var(--stone)" />
+              <div style="padding:6px 8px;background:var(--stone);font-size:12px;color:var(--text2)">Phòng nghỉ — Đồng Văn</div>
+            </div>
+
+            <div style="border-radius:8px;overflow:hidden;position:relative">
+              <img src="assets/phong-tai-dong-van-1.jpg" alt="Phòng tại Đồng Văn (2)"
+                style="width:100%;height:140px;object-fit:cover;display:block;background:var(--stone)" />
+              <div style="padding:6px 8px;background:var(--stone);font-size:12px;color:var(--text2)">Phòng nghỉ — Đồng Văn (2)</div>
+            </div>
+
+            <div style="border-radius:8px;overflow:hidden;position:relative">
+              <video src="assets/phong-tai-meo-vac.mp4" controls muted playsinline
+                style="width:100%;height:140px;object-fit:cover;display:block;background:#111;border-radius:0"></video>
+              <div style="padding:6px 8px;background:var(--stone);font-size:12px;color:var(--text2)">Phòng nghỉ — Mèo Vạc (video)</div>
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+
+      <div class="ti">
+        <div class="ti-main">
+          <div class="ti-time">Cả ngày 25/9 — Trước khi lên xe</div>
+          <div class="ti-act">Chuẩn bị hành lý · Kiểm tra đồ</div>
+          <div class="ti-place">Tại nhà — Hà Nội</div>
+          <div class="ti-desc">Ngày thứ Sáu bình thường — tranh thủ buổi chiều hoặc tối chuẩn bị hành lý. <strong>Chọn balo thay vì vali</strong> — xe máy đường núi không có chỗ để vali lớn, balo 20–30L là lý tưởng vừa đủ buộc sau yên xe. Combo cung cấp dây buộc đồ và bọc hành lý chống mưa nên không cần lo thêm.</div>
+          <div class="ti-note">Mang càng gọn càng tốt. Quần áo 3 ngày + thuốc men + CCCD + GPLX + tiền mặt là đủ.</div>
+        </div>
+      </div>
+
+      <div class="ti star">
+        <div class="ti-main">
+          <div class="ti-time">~19:00 – 20:00</div>
+          <div class="ti-act">Lên xe Cabin khởi hành · Xuất phát</div>
+          <div class="ti-place">Bến xe Mỹ Đình hoặc điểm đón trên lộ trình — xác nhận với tour</div>
+          <div class="ti-desc">Ra điểm đón sớm ~20 phút. Xe Cabin đôi có buồng riêng 2 người — kín đáo và riêng tư hơn giường nằm thường. Mang theo áo khoác mỏng vì điều hòa trong xe lạnh, đặc biệt nửa đêm qua vùng núi. Chuẩn bị đồ ăn nhẹ và nước uống cho hành trình đêm.</div>
+          <div class="ti-note">Đặt báo thức 5h30 sáng — xe về đến TP. Hà Giang khoảng 5–6h, không ngủ quên quá giờ!</div>
+        </div>
+        <div class="map-input-zone">
+          <label>Bản đồ điểm đón xe:</label>
+          <input type="text" placeholder="Dán link Google Maps vào đây..." data-mapkey="map_d0_benxe" oninput="saveMapLink(this)" />
+          <button class="go-map" onclick="openMap(this)">Mở ↗</button>
+        </div>
+      </div>
+
+      <div class="ti">
+        <div class="ti-main">
+          <div class="ti-time">20:00 – 05:30 (hôm sau)</div>
+          <div class="ti-act">Di chuyển đêm Hà Nội → TP. Hà Giang</div>
+          <div class="ti-place">Trên xe Cabin · Quốc lộ 2 → QL279</div>
+          <div class="ti-desc">Hành trình ~280km, qua Tuyên Quang, Bắc Quang rồi vào TP. Hà Giang. Xe dừng 1 lần nghỉ vệ sinh khoảng km150 — tranh thủ xuống duỗi chân. Đến TP. Hà Giang lúc 5–6h sáng, combo hỗ trợ phòng nghỉ tạm có điều hòa để tắm rửa và nghỉ ngơi trước khi nhận xe máy lúc 6h30.</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ── DAY 1 ── -->
+  <div class="day-panel" id="dp1">
+    <div class="day-banner">
+      <div class="bignum">01</div>
+      <div><h3>Thứ Bảy, 26 tháng 9</h3><p>TP. Hà Giang → Quản Bạ → Yên Minh → Sủng Là → Đồng Văn · Ngủ tại phố cổ Đồng Văn</p></div>
+    </div>
+    <div class="tl">
+
+      <div class="ti">
+        <div class="ti-main">
+          <div class="ti-time">06:30 – 07:00</div>
+          <div class="ti-act">Nhận xe máy · Ăn sáng · Khởi hành</div>
+          <div class="ti-place">TP. Hà Giang — điểm nhận xe của đơn vị tour</div>
+          <div class="ti-desc">Kiểm tra kỹ phanh, còi, đèn, gương trước khi rời bến. Đổ đầy bình xăng tại đây vì càng vào sâu trạm xăng càng thưa. Ăn sáng nhanh trong khu vực TP. Hà Giang.</div>
+          <div class="ti-note">Mặc đủ bảo hộ từ đầu chuyến: mũ, găng tay, áo khoác. Trời sáng sớm cao nguyên còn lạnh.</div>
+        </div>
+        <div class="map-input-zone">
+          <label>Bản đồ điểm nhận xe:</label>
+          <input type="text" placeholder="Dán link Google Maps vào đây..." data-mapkey="map_d1_01" oninput="saveMapLink(this)" />
+          <button class="go-map" onclick="openMap(this)">Mở ↗</button>
+        </div>
+      </div>
+
+      <div class="ti">
+        <div class="ti-main">
+          <div class="ti-time">07:00 – 07:15</div>
+          <div class="ti-act">Check-in Km0 Hà Giang</div>
+          <div class="ti-place">Cột mốc Km0, trung tâm TP. Hà Giang</div>
+          <div class="ti-desc">Điểm xuất phát biểu tượng của mọi hành trình Hà Giang. Dừng chụp ảnh kỷ niệm, không mất nhiều thời gian.</div>
+          <a href="https://maps.google.com/?q=21.0038,105.0395" target="_blank" class="map-btn">Bản đồ ↗</a>
+        </div>
+      </div>
+
+      <div class="ti">
+        <div class="ti-main">
+          <div class="ti-time">07:15 – 08:30</div>
+          <div class="ti-act">Cổng trời Quản Bạ · Núi Đôi Cô Tiên</div>
+          <div class="ti-place">Dốc Bắc Sum → Đỉnh Cổng trời Quản Bạ (~46km)</div>
+          <div class="ti-desc">Đây là lần đầu tiên trên hành trình nhìn thấy toàn cảnh cao nguyên đá mở ra trước mắt. Núi Đôi Cô Tiên — hai ngọn núi trứng khổng lồ sừng sững giữa thung lũng Quản Bạ — là khung cảnh không đâu có. Nên dừng ở điểm nhìn trên đỉnh đèo, không cần vào sân quan sát trả phí.</div>
+          <a href="https://maps.google.com/?q=23.1833,104.9667" target="_blank" class="map-btn">Bản đồ ↗</a>
+        </div>
+      </div>
+
+      <div class="ti">
+        <div class="ti-main">
+          <div class="ti-time">08:30 – 10:00</div>
+          <div class="ti-act">Vượt Dốc Thẩm Mã · Tiến về Yên Minh</div>
+          <div class="ti-place">Quản Bạ → Yên Minh (~50km)</div>
+          <div class="ti-desc">Dốc Thẩm Mã nổi tiếng với những khúc cua liên tiếp, đường hẹp, có đoạn cua chữ M và chữ S gắt. Đây là đoạn cần đặc biệt cẩn thận, đi chậm, luôn bấm còi ở cua khuất. Cảnh đẹp nhưng không nên dừng lại ở điểm mà xe to lại không thấy.</div>
+          <div class="ti-note">Đi chậm, bấm còi liên tục ở cua khuất. Đây là đoạn tai nạn hay xảy ra nhất với du khách.</div>
+          <a href="https://maps.google.com/?q=23.1333,105.0167" target="_blank" class="map-btn">Bản đồ Yên Minh ↗</a>
+        </div>
+      </div>
+
+      <div class="ti">
+        <div class="ti-main">
+          <div class="ti-time">10:00 – 11:00</div>
+          <div class="ti-act">Dạo làng cổ H'Mông — Phố Cáo</div>
+          <div class="ti-place">Phố Cáo, cách Yên Minh ~15km</div>
+          <div class="ti-desc">Làng H'Mông cổ nằm giữa vùng đá tai mèo, nhà trình tường đất đặc trưng, cổng đá rêu phong. Phụ nữ H'Mông trong trang phục thêu tay ngồi trước cửa. Đây là điểm ít khách du lịch hơn so với các điểm chính, nên còn giữ được nét nguyên sơ.</div>
+          <div class="ti-note">Gõ cửa hoặc hỏi trước khi vào sân nhà dân. Tặng kẹo cho trẻ em nếu có.</div>
+          <a href="https://maps.google.com/?q=23.2167,105.0833" target="_blank" class="map-btn">Bản đồ ↗</a>
+        </div>
+      </div>
+
+      <div class="ti star">
+        <div class="ti-main">
+          <div class="ti-time">11:00 – 12:30</div>
+          <div class="ti-act">Ăn trưa · Nghỉ ngơi giữa ngày</div>
+          <div class="ti-place">Phố Cáo hoặc Sủng Là — tìm quán dọc đường</div>
+          <div class="ti-desc">Khu vực này có một số quán cơm đơn giản phục vụ khách du lịch. Đặc sản: <strong>thắng cố</strong> (súp thịt ngựa/lợn hầm), <strong>cháo ấu tẩu</strong> (cháo có pha củ ấu tẩu — vị đắng nhẹ, ấm bụng), <strong>mèn mén</strong> (ngô nghiền hấp). Đây là bữa trưa dài nhất ngày — tranh thủ nghỉ để lại sức chiều.</div>
+        </div>
+      </div>
+
+      <div class="ti">
+        <div class="ti-main">
+          <div class="ti-time">12:30 – 13:30</div>
+          <div class="ti-act">Cây Cô Đơn · Nhà của Pao</div>
+          <div class="ti-place">Sủng Là, huyện Đồng Văn</div>
+          <div class="ti-desc">Cây Cô Đơn là cây sa mộc đơn độc giữa thảo nguyên đá, biểu tượng vẻ đẹp cô liêu của Hà Giang. Nhà của Pao — ngôi nhà trình tường cổ được dùng làm bối cảnh bộ phim "Chuyện của Pao" — hiện là điểm tham quan (có phí vào cửa nhỏ). Kiến trúc nhà H'Mông nguyên bản rất đáng xem.</div>
+          <a href="https://maps.google.com/?q=23.2500,105.1833" target="_blank" class="map-btn">Bản đồ ↗</a>
+        </div>
+      </div>
+
+      <div class="ti">
+        <div class="ti-main">
+          <div class="ti-time">13:30 – 14:30</div>
+          <div class="ti-act">Dinh thự Vua Mèo</div>
+          <div class="ti-place">Sà Phìn, huyện Đồng Văn (~8km từ Sủng Là)</div>
+          <div class="ti-desc">Dinh thự họ Vương — gia tộc quyền lực nhất vùng cao nguyên đá đầu thế kỷ 20 — được xây theo kiến trúc kết hợp Hán–Mèo, tường đá kiên cố, cổng đá chạm khắc tinh xảo. Rộng hơn 1.000m², có gần 100 phòng. Một trong những công trình kiến trúc độc đáo nhất miền Bắc.</div>
+          <div class="ti-note">Mặc trang phục kín đáo. Có hướng dẫn viên tại chỗ (tiếng Việt) nếu muốn nghe giới thiệu.</div>
+          <a href="https://maps.google.com/?q=23.2667,105.2333" target="_blank" class="map-btn">Bản đồ ↗</a>
+        </div>
+      </div>
+
+      <div class="ti">
+        <div class="ti-main">
+          <div class="ti-time">14:30 – 15:15</div>
+          <div class="ti-act">Nhận phòng · Tắm giặt · Nghỉ ngơi</div>
+          <div class="ti-place">Homestay / Khách sạn phố cổ Đồng Văn</div>
+          <div class="ti-desc">Vào phòng sớm, tắm rửa sau ngày dài nắng gió. Thả bộ trong phố cổ buổi chiều khi ánh sáng vàng đẹp nhất. Phố cổ Đồng Văn nhỏ, có thể đi bộ khắp trong 30 phút.</div>
+        </div>
+        <div class="map-input-zone">
+          <label>Bản đồ homestay đêm 1:</label>
+          <input type="text" placeholder="Dán link Google Maps vào đây..." data-mapkey="map_d1_homestay" oninput="saveMapLink(this)" />
+          <button class="go-map" onclick="openMap(this)">Mở ↗</button>
+        </div>
+      </div>
+
+      <div class="ti star">
+        <div class="ti-main">
+          <div class="ti-time">18:00 – 19:00</div>
+          <div class="ti-act">Ăn tối tại Đồng Văn</div>
+          <div class="ti-place">Các quán trong và quanh phố cổ Đồng Văn</div>
+          <div class="ti-desc">Đặc sản cần thử ở Đồng Văn: <strong>thắng cố ngựa</strong> (nồi to ăn chung, đậm đà), <strong>mèn mén</strong> xào tỏi, <strong>bánh cuốn trứng</strong> theo kiểu người Tày, <strong>rượu ngô Đồng Văn</strong> — thơm nhẹ, uống ấm. Không khí bữa tối ở đây rất dễ chịu, trời mát, không gian yên tĩnh hơn hẳn ban ngày.</div>
+        </div>
+      </div>
+
+      <div class="ti">
+        <div class="ti-main">
+          <div class="ti-time">19:30 – 22:00</div>
+          <div class="ti-act">Dạo phố cổ · Cà phê · Nghe khèn Mông</div>
+          <div class="ti-place">Phố cổ Đồng Văn — khu trung tâm</div>
+          <div class="ti-desc">Tối thứ Bảy là đêm sôi động nhất phố cổ Đồng Văn trong tuần — người từ các bản xuống phố, đồng bào dân tộc mặc trang phục truyền thống, các quán cà phê và quán nhậu đèn vàng lung linh. Tiếng khèn Mông đôi khi vang lên từ góc phố. Không cần kế hoạch cụ thể — cứ thả bộ và cảm nhận.</div>
+          <a href="https://maps.google.com/?q=23.2833,105.3500" target="_blank" class="map-btn">Bản đồ phố cổ ↗</a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ── DAY 2 ── -->
+  <div class="day-panel" id="dp2">
+    <div class="day-banner">
+      <div class="bignum">02</div>
+      <div><h3>Chủ Nhật, 27 tháng 9</h3><p>Đồng Văn → Chợ phiên → Lũng Cú → Lô Lô Chải → Mã Pí Lèng → Nho Quế → Mèo Vạc</p></div>
+    </div>
+    <div class="tl">
+
+      <div class="ti star">
+        <div class="ti-main">
+          <div class="ti-time">05:30 – 07:00</div>
+          <div class="ti-act">⭐ Chợ phiên Đồng Văn · Ăn sáng tại chợ</div>
+          <div class="ti-place">Chợ phiên Đồng Văn — họp từ ~5h, tan lúc 9–10h</div>
+          <div class="ti-desc">Chỉ họp vào sáng Chủ Nhật — đây là lý do chính nhóm mình chọn đi cuối tuần. Đồng bào H'Mông hoa, H'Mông đen, Lô Lô, Giấy... từ các bản xa đi bộ hoặc xe máy xuống chợ từ sáng sớm. Người mua kẻ bán áo thêu tay, thổ cẩm, gia súc, dược liệu, rau củ rừng. Ăn sáng ngay tại chợ: xôi ngũ sắc, bánh cuốn, cháo ấu tẩu nóng hổi bán trong chợ.</div>
+          <div class="ti-note">Đặt đồng hồ lúc 5h. Đây là trải nghiệm đỉnh nhất chuyến đi — dậy muộn là hỏng.</div>
+          <a href="https://maps.google.com/?q=23.2833,105.3500" target="_blank" class="map-btn">Bản đồ chợ ↗</a>
+        </div>
+      </div>
+
+      <div class="ti">
+        <div class="ti-main">
+          <div class="ti-time">07:00 – 07:45</div>
+          <div class="ti-act">Di chuyển đến Lũng Cú</div>
+          <div class="ti-place">Đồng Văn → Lũng Cú (~24km, khoảng 45 phút)</div>
+          <div class="ti-desc">Đường từ Đồng Văn lên Lũng Cú tương đối tốt, không quá nhiều cua nguy hiểm. Phong cảnh hai bên là ruộng bậc thang và làng bản người Lô Lô. Có thể dừng chụp ảnh tại vài điểm nhìn dọc đường.</div>
+          <a href="https://maps.google.com/?q=23.3667,105.3333" target="_blank" class="map-btn">Bản đồ Lũng Cú ↗</a>
+        </div>
+      </div>
+
+      <div class="ti star">
+        <div class="ti-main">
+          <div class="ti-time">08:00 – 10:00</div>
+          <div class="ti-act">⭐ Leo Cột cờ Lũng Cú</div>
+          <div class="ti-place">Đỉnh núi Rồng, Lũng Cú — độ cao 1.700m</div>
+          <div class="ti-desc">Leo 389 bậc đá lên đỉnh núi Rồng, nơi có cột cờ Tổ quốc cao 33.15m với lá cờ rộng 54m². Từ trên nhìn xuống là hai thung lũng Séo Lủng và làng Lô Lô Chải hai bên — đẹp nhất vào buổi sáng khi sương còn mờ. Đây là một trong những điểm địa đầu Tổ quốc và là niềm tự hào khi đặt chân đến.</div>
+          <div class="ti-note">Giày bám tốt, đế không trơn. Đường đá ướt vào buổi sáng. Không leo nếu trời mưa to.</div>
+          <a href="https://maps.google.com/?q=23.3700,105.3300" target="_blank" class="map-btn">Bản đồ ↗</a>
+        </div>
+      </div>
+
+      <div class="ti">
+        <div class="ti-main">
+          <div class="ti-time">10:00 – 12:30</div>
+          <div class="ti-act">Làng Lô Lô Chải · Ăn trưa · Thổ cẩm</div>
+          <div class="ti-place">Làng Lô Lô Chải, dưới chân núi Rồng</div>
+          <div class="ti-desc">Làng của người Lô Lô — một trong những dân tộc ít người nhất Việt Nam (chỉ khoảng 4.000 người). Nhà trình tường đặc trưng, trang phục thêu tay sặc sỡ theo kiểu riêng không nhầm với H'Mông. Có vài quán nhỏ phục vụ cơm trưa và đồ uống. Phụ nữ bày bán thổ cẩm, đồ thêu tay — mua để ủng hộ là tốt nhất.</div>
+          <div class="ti-note">Xin phép trước khi chụp ảnh người dân, đặc biệt người già và trẻ em. Không trả giá gắt tại đây.</div>
+          <a href="https://maps.google.com/?q=23.3600,105.3200" target="_blank" class="map-btn">Bản đồ ↗</a>
+        </div>
+      </div>
+
+      <div class="ti star">
+        <div class="ti-main">
+          <div class="ti-time">12:30 – 14:00</div>
+          <div class="ti-act">⭐ Đèo Mã Pí Lèng</div>
+          <div class="ti-place">Đèo Mã Pí Lèng (~50km từ Lũng Cú, qua Đồng Văn)</div>
+          <div class="ti-desc">Tên Mã Pí Lèng nghĩa là "sống mũi ngựa" — chỉ độ dốc thẳng đứng đến mức ngựa cũng phải thở dốc. Đây là đèo dài và nguy hiểm nhất trong tứ đại đỉnh đèo Việt Nam. Nhưng cũng là nơi có tầm nhìn đẹp bậc nhất: từ điểm dừng giữa đèo, nhìn xuống sông Nho Quế xanh như ngọc bích, vách đá thẳng đứng hai bên sâu hàng trăm mét — hùng vĩ không bút nào tả hết.</div>
+          <div class="ti-note">Bấm còi liên tục ở cua khuất. Không dừng giữa đường hẹp. Dừng tại điểm có mở rộng hoặc bãi đỗ.</div>
+          <a href="https://maps.google.com/?q=23.1700,105.4200" target="_blank" class="map-btn">Bản đồ ↗</a>
+        </div>
+      </div>
+
+      <div class="ti star">
+        <div class="ti-main">
+          <div class="ti-time">14:00 – 15:30</div>
+          <div class="ti-act">⭐ Đi thuyền hẻm Tu Sản — Sông Nho Quế</div>
+          <div class="ti-place">Bến thuyền sông Nho Quế, chân đèo Mã Pí Lèng</div>
+          <div class="ti-desc">Hẻm Tu Sản được mệnh danh là hẻm núi sâu nhất Đông Nam Á — vách đá hai bên dựng thẳng đứng, cao đến 700–900m, còn dòng Nho Quế xanh thẳm chảy dưới đáy. Ngồi thuyền nhỏ luồn qua hẻm, ngước nhìn lên vách đá phủ dương xỉ và cây dại, nghe tiếng nước chảy — đây là trải nghiệm khác hoàn toàn với việc nhìn từ đèo xuống.</div>
+          <div class="ti-note">Bắt buộc mặc áo phao suốt hành trình thuyền. Nước có thể lạnh nếu mưa. Thuyền thường chứa 4–6 người.</div>
+          <a href="https://maps.google.com/?q=23.1500,105.4500" target="_blank" class="map-btn">Bản đồ bến thuyền ↗</a>
+        </div>
+      </div>
+
+      <div class="ti">
+        <div class="ti-main">
+          <div class="ti-time">15:30 – 16:15</div>
+          <div class="ti-act">Nhận phòng · Nghỉ ngơi</div>
+          <div class="ti-place">Homestay / Khách sạn tại thị trấn Mèo Vạc</div>
+          <div class="ti-desc">Mèo Vạc nhỏ và yên tĩnh hơn Đồng Văn, ít khách hơn. Homestay thường có view nhìn ra thung lũng. Về phòng trước 17h để tránh đổ đèo khi trời tối — đường núi không có đèn đường.</div>
+          <div class="ti-note">Đây là quy tắc bất di bất dịch: về trước 17h. Nguy hiểm gấp đôi nếu đổ đèo tối.</div>
+        </div>
+        <div class="map-input-zone">
+          <label>Bản đồ homestay đêm 2:</label>
+          <input type="text" placeholder="Dán link Google Maps vào đây..." data-mapkey="map_d2_homestay" oninput="saveMapLink(this)" />
+          <button class="go-map" onclick="openMap(this)">Mở ↗</button>
+        </div>
+      </div>
+
+      <div class="ti star">
+        <div class="ti-main">
+          <div class="ti-time">18:00 – 19:00</div>
+          <div class="ti-act">Ăn tối tại Mèo Vạc</div>
+          <div class="ti-place">Các quán trong thị trấn Mèo Vạc</div>
+          <div class="ti-desc">Mèo Vạc có ít quán hơn Đồng Văn nhưng đồ ăn ngon không kém. Thử: <strong>đồ nướng vỉa hè</strong> (lòng nướng, thịt trâu gác bếp), <strong>thắng cố</strong> phiên bản Mèo Vạc đậm đà hơn, <strong>rau rừng xào tỏi</strong>. Buổi tối không khí trong lành, trời mát.</div>
+        </div>
+      </div>
+
+      <div class="ti">
+        <div class="ti-main">
+          <div class="ti-time">19:30 – 21:30</div>
+          <div class="ti-act">Dạo chợ đêm · Ẩm thực đường phố</div>
+          <div class="ti-place">Khu trung tâm chợ Mèo Vạc</div>
+          <div class="ti-desc">Tối Chủ Nhật ở Mèo Vạc yên tĩnh hơn tối thứ Bảy ở Đồng Văn — nhưng vẫn có hàng rong, quán vỉa hè, người dân tụ tập. Chợ đêm chính thức chỉ có thứ Bảy, nhưng khu trung tâm tối nào cũng có hoạt động về đêm nhỏ lẻ. Đi dạo, uống cà phê trứng, mua vài thứ lặt vặt.</div>
+          <a href="https://maps.google.com/?q=23.1500,105.4000" target="_blank" class="map-btn">Bản đồ trung tâm Mèo Vạc ↗</a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ── DAY 3 ── -->
+  <div class="day-panel" id="dp3">
+    <div class="day-banner">
+      <div class="bignum">03</div>
+      <div><h3>Thứ Hai, 28 tháng 9</h3><p>Mèo Vạc → Pả Vi → Yên Minh → Quản Bạ → TP. Hà Giang → Lên xe về Hà Nội đêm</p></div>
+    </div>
+    <div class="tl">
+
+      <div class="ti">
+        <div class="ti-main">
+          <div class="ti-time">07:30 – 08:00</div>
+          <div class="ti-act">Ăn sáng · Trả phòng</div>
+          <div class="ti-place">Thị trấn Mèo Vạc</div>
+          <div class="ti-desc">Ăn sáng nhanh, dọn đồ trả phòng. Ngày 3 là ngày dài nhất về quãng đường (~150km), nên xuất phát sớm, không nên ngủ nướng. Kiểm tra lại toàn bộ hành lý, đặc biệt đồ điện tử và giấy tờ.</div>
+        </div>
+      </div>
+
+      <div class="ti">
+        <div class="ti-main">
+          <div class="ti-time">08:00 – 09:00</div>
+          <div class="ti-act">Làng văn hóa Pả Vi</div>
+          <div class="ti-place">Làng Pả Vi, ~7km khỏi Mèo Vạc</div>
+          <div class="ti-desc">Làng người H'Mông nằm trên sườn đồi, ít khách hơn Lô Lô Chải nhiều. Buổi sáng sớm, người dân bắt đầu ra đồng, trẻ em đến trường — không khí bình yên, không ồn ào. Có thể dạo qua mà không cần kế hoạch cụ thể, chụp ảnh cuộc sống thường nhật.</div>
+          <div class="ti-note">Đây là điểm cuối cùng trước hành trình dài về. Tận hưởng không khí buổi sáng cao nguyên.</div>
+          <a href="https://maps.google.com/?q=23.1333,105.3833" target="_blank" class="map-btn">Bản đồ ↗</a>
+        </div>
+      </div>
+
+      <div class="ti">
+        <div class="ti-main">
+          <div class="ti-time">09:00 – 11:00</div>
+          <div class="ti-act">Di chuyển chặng 1 — Pả Vi → Yên Minh</div>
+          <div class="ti-place">Pả Vi → Đồng Văn → Yên Minh (~80km)</div>
+          <div class="ti-desc">Chặng đường dài nhất ngày 3. Đi qua lại những cung đường ngày 1–2, lần này xuôi chiều nên thoải mái hơn. Nên dừng giải lao 15 phút mỗi 1,5h — ngồi xe máy liên tục nhiều giờ rất mỏi lưng và tay. Tranh thủ nạp xăng tại Đồng Văn hoặc Yên Minh.</div>
+          <div class="ti-note">Ngày 3 tổng ~150km — mệt hơn mình nghĩ. Đừng cố sức, nghỉ khi cần thiết.</div>
+        </div>
+      </div>
+
+      <div class="ti star">
+        <div class="ti-main">
+          <div class="ti-time">11:00 – 12:00</div>
+          <div class="ti-act">Ăn trưa tại Yên Minh</div>
+          <div class="ti-place">Thị trấn Yên Minh</div>
+          <div class="ti-desc">Yên Minh có nhiều lựa chọn ăn trưa hơn các điểm trước. Thị trấn nhỏ nhưng có chợ và nhiều quán cơm bình dân, phở, bún. Nghỉ ngơi lâu hơn ở đây — đây là điểm dừng cuối trước chặng 2 về TP. Hà Giang.</div>
+          <a href="https://maps.google.com/?q=23.1000,105.0500" target="_blank" class="map-btn">Bản đồ Yên Minh ↗</a>
+        </div>
+      </div>
+
+      <div class="ti">
+        <div class="ti-main">
+          <div class="ti-time">12:00 – 14:00</div>
+          <div class="ti-act">Di chuyển chặng 2 về TP. Hà Giang</div>
+          <div class="ti-place">Yên Minh → Quản Bạ → TP. Hà Giang (~70km)</div>
+          <div class="ti-desc">Chặng cuối cùng về thành phố. Đường tốt hơn, nhiều đoạn thẳng. Nếu trời đẹp buổi chiều, cảnh Cổng trời Quản Bạ khi về ngược chiều sáng lại mang vẻ đẹp khác — ánh nắng chiều đổ vàng xuống thung lũng.</div>
+        </div>
+      </div>
+
+      <div class="ti">
+        <div class="ti-main">
+          <div class="ti-time">14:00 – 15:00</div>
+          <div class="ti-act">Trả xe máy · Mua đặc sản</div>
+          <div class="ti-place">TP. Hà Giang — điểm trả xe theo tour</div>
+          <div class="ti-desc">Trả xe, kiểm tra lại xe với đơn vị tour. Tranh thủ mua đặc sản tại các cửa hàng gần bến xe hoặc chợ TP. Hà Giang: <strong>mật ong bạc hà Phó Bảng</strong> (thơm đặc trưng, không nơi nào có), <strong>chè shan tuyết Hoàng Su Phì</strong>, <strong>thắng cố đóng hộp</strong>, <strong>rượu ngô Đồng Văn</strong>.</div>
+          <a href="https://maps.google.com/?q=22.8333,104.9833" target="_blank" class="map-btn">Bản đồ TP. Hà Giang ↗</a>
+        </div>
+      </div>
+
+      <div class="ti">
+        <div class="ti-main">
+          <div class="ti-time">15:00 – 19:00</div>
+          <div class="ti-act">Tắm giặt · Nghỉ ngơi · Ăn tối sớm</div>
+          <div class="ti-place">TP. Hà Giang — tự do</div>
+          <div class="ti-desc">Tìm chỗ tắm và nghỉ ngơi trước khi lên xe (homestay, nhà tắm công cộng, hoặc nhờ khách sạn mini giờ). Ăn tối sớm trước 18h30. Phố TP. Hà Giang có nhiều quán cơm ngon, phở, bún bò Huế, bánh mì. Mua đồ ăn đường cho chuyến xe đêm về.</div>
+        </div>
+      </div>
+
+      <div class="ti star">
+        <div class="ti-main">
+          <div class="ti-time">19:00 – 20:00</div>
+          <div class="ti-act">Lên xe giường nằm về Hà Nội</div>
+          <div class="ti-place">Bến xe TP. Hà Giang</div>
+          <div class="ti-desc">Xe khởi hành khoảng 19–20h, về đến Hà Nội lúc 4–5h sáng hôm sau. Đặt xe chuyến muộn (19–20h thay vì 18h) để có đủ thời gian ăn tối và không vội vã. Về nhà là kết thúc một chuyến đi đáng nhớ.</div>
+          <div class="ti-note">Đặt xe chuyến muộn để dự phòng — không nên ép lịch buổi chiều.</div>
+          <a href="https://maps.google.com/?q=22.8300,104.9800" target="_blank" class="map-btn">Bản đồ bến xe ↗</a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- COST -->
+<div class="wrap" id="cost">
+  <div class="s-label">Chi phí</div>
+  <div class="s-title">Dự kiến chi phí chuyến đi</div>
+  <div class="s-sub">Tính cho 1 người · Combo tự túc đặt riêng</div>
+
+  <div class="cost-tag">
+    <div class="big">1.600.000 – 1.800.000đ</div>
+    <p>Chi phí cố định đã biết chắc: xe khách khứ hồi + xe máy 3N2D + homestay 2 đêm</p>
+  </div>
+
+  <div class="cost-rows">
+    <div class="cost-row combo">
+      <div class="cr-left">
+        <div class="cr-name">Combo tự túc 3N2D</div>
+        <div class="cr-desc">Xe khách giường nằm khứ hồi Hà Nội – Hà Giang · Xe máy di chuyển 3 ngày · Homestay 2 đêm tại Đồng Văn và Mèo Vạc · Bảo hộ cơ bản</div>
+      </div>
+      <div class="cr-price">1.600.000 – 1.800.000đ</div>
+    </div>
+    <div class="cost-row">
+      <div class="cr-left">
+        <div class="cr-name">Vé tham quan phát sinh</div>
+        <div class="cr-desc">Thuyền hẻm Tu Sản sông Nho Quế · Vé vào Cột cờ Lũng Cú · Vé Dinh thự Vua Mèo · Vé Nhà của Pao</div>
+      </div>
+      <div class="cr-price tbd">Tự túc · cập nhật sau</div>
+    </div>
+    <div class="cost-row">
+      <div class="cr-left">
+        <div class="cr-name">Ăn uống toàn chuyến</div>
+        <div class="cr-desc">Tự chọn quán, tự thanh toán · Từ sáng ngày 1 đến tối ngày 3</div>
+      </div>
+      <div class="cr-price tbd">Tự túc · tùy nhóm</div>
+    </div>
+    <div class="cost-row">
+      <div class="cr-left">
+        <div class="cr-name">Mua sắm · Chi tiêu cá nhân</div>
+        <div class="cr-desc">Đặc sản · Thổ cẩm chợ phiên · Cà phê đường phố · Tùy từng người</div>
+      </div>
+      <div class="cr-price tbd">Tự túc · tùy người</div>
+    </div>
+  </div>
+
+  <div class="cost-total">
+    <div class="tl-label">Chi phí cố định / người (đã biết)</div>
+    <div class="tl-price">1.600.000 – 1.800.000đ</div>
+  </div>
+  <p style="font-size:12px;color:var(--text3);margin-top:12px">* Giá combo tham khảo từ đơn vị tour, xác nhận lại khi đặt. Các khoản tự túc nhóm tự quản lý.</p>
+</div>
+
+<!-- REGISTRATION -->
+<div class="wrap" id="register">
+  <div class="s-label">Đăng ký</div>
+  <div class="s-title">Đăng ký tham gia chuyến đi</div>
+  <div class="s-sub">Điền thông tin để nhóm biết ai đang đi · Lưu trên trình duyệt của bạn</div>
+
+  <div class="reg-form-box">
+    <h3>Thêm thành viên</h3>
+    <div class="reg-grid">
+      <div class="fg">
+        <label>Họ và tên *</label>
+        <input type="text" id="rg-name" placeholder="Ví dụ: Nguyễn Văn An" maxlength="50" />
+      </div>
+      <div class="fg">
+        <label>Số điện thoại</label>
+        <input type="tel" id="rg-phone" placeholder="Để liên lạc khi cần" maxlength="15" />
+      </div>
+      <div class="fg">
+        <label>Có GPLX hạng A1 trở lên?</label>
+        <div class="radio-row">
+          <label><input type="radio" name="rg-license" value="yes" checked /> Có, tự lái được</label>
+          <label><input type="radio" name="rg-license" value="no" /> Không, ngồi sau</label>
+        </div>
+      </div>
+      <div class="fg">
+        <label>Thực phẩm dị ứng / yêu cầu khác</label>
+        <input type="text" id="rg-note" placeholder="Ví dụ: không ăn được đồ cay, dị ứng hải sản..." maxlength="100" />
+      </div>
+    </div>
+    <button class="reg-submit" onclick="addMember()">Đăng ký tham gia</button>
+    <span id="rg-err" style="margin-left:12px;font-size:13px;color:var(--terra)"></span>
+  </div>
+
+  <div id="members-wrap">
+    <div style="font-size:13px;font-weight:bold;color:var(--text2);margin-bottom:12px;letter-spacing:.3px">DANH SÁCH THÀNH VIÊN (<span id="m-count">0</span> người)</div>
+    <div class="members-list" id="m-list">
+      <div class="no-members" id="no-members">Chưa có ai đăng ký. Hãy là người đầu tiên!</div>
+    </div>
+  </div>
+</div>
+
+<!-- CHECKLIST -->
+<div class="wrap" id="checklist">
+  <div class="s-label">Chuẩn bị</div>
+  <div class="s-title">Đừng để quên gì</div>
+  <div class="s-sub">Bấm tick khi đã chuẩn bị xong · Trình duyệt tự nhớ cho bạn</div>
+
+  <div class="cl-prog-wrap">
+    <div class="cl-prog-txt" id="cl-txt">0/14 mục đã chuẩn bị</div>
+    <div class="cl-bar-bg"><div class="cl-bar" id="cl-bar" style="width:0%"></div></div>
+  </div>
+
+  <div class="cl-sec">
+    <div class="cl-sec-title">Trang phục & Bảo hộ</div>
+    <div class="cl-item" onclick="tick(this)" data-id="c01"><div class="cl-box"></div><div><div class="cl-tx">Áo khoác mỏng</div><div class="cl-hint">Cao nguyên sáng/tối chênh lệch lớn, ban đêm có thể xuống 15°C</div></div></div>
+    <div class="cl-item" onclick="tick(this)" data-id="c02"><div class="cl-box"></div><div><div class="cl-tx">Giày bám tốt, đế không trơn</div><div class="cl-hint">Leo 389 bậc Lũng Cú, dạo bản đường đất</div></div></div>
+    <div class="cl-item" onclick="tick(this)" data-id="c03"><div class="cl-box"></div><div><div class="cl-tx">Áo mưa gọn nhẹ (loại bỏ túi)</div><div class="cl-hint">Cao nguyên mưa bất chợt, đặc biệt chiều tối</div></div></div>
+    <div class="cl-item" onclick="tick(this)" data-id="c04"><div class="cl-box"></div><div><div class="cl-tx">Kem chống nắng SPF 50+</div><div class="cl-hint">UV cao nguyên mạnh hơn đồng bằng đáng kể</div></div></div>
+  </div>
+  <div class="cl-sec">
+    <div class="cl-sec-title">Giấy tờ & Tiền bạc</div>
+    <div class="cl-item" onclick="tick(this)" data-id="c05"><div class="cl-box"></div><div><div class="cl-tx">CCCD (Căn cước công dân)</div><div class="cl-hint">Bắt buộc để đăng ký lưu trú tại homestay</div></div></div>
+    <div class="cl-item" onclick="tick(this)" data-id="c06"><div class="cl-box"></div><div><div class="cl-tx">GPLX hạng A1 trở lên</div><div class="cl-hint">Bắt buộc nếu tự lái xe máy · Không có → ngồi sau easy rider</div></div></div>
+    <div class="cl-item" onclick="tick(this)" data-id="c07"><div class="cl-box"></div><div><div class="cl-tx">Tiền mặt đủ dùng cả chuyến</div><div class="cl-hint">Đồng Văn–Mèo Vạc rất ít ATM · Rút trước ở TP. Hà Giang</div></div></div>
+    <div class="cl-item" onclick="tick(this)" data-id="c08"><div class="cl-box"></div><div><div class="cl-tx">Đã xác nhận & thanh toán combo tour</div><div class="cl-hint">Giữ biên lai hoặc screenshot xác nhận</div></div></div>
+    <div class="cl-item" onclick="tick(this)" data-id="c09"><div class="cl-box"></div><div><div class="cl-tx">Đã xin nghỉ phép ngày 28/9</div><div class="cl-hint">28/9 là thứ Hai — ngày làm việc bình thường</div></div></div>
+  </div>
+  <div class="cl-sec">
+    <div class="cl-sec-title">Thuốc men & Đồ dùng</div>
+    <div class="cl-item" onclick="tick(this)" data-id="c10"><div class="cl-box"></div><div><div class="cl-tx">Thuốc say xe</div><div class="cl-hint">Uống trước khi lên xe giường nằm và các đèo dài</div></div></div>
+    <div class="cl-item" onclick="tick(this)" data-id="c11"><div class="cl-box"></div><div><div class="cl-tx">Thuốc đau bụng / tiêu chảy</div><div class="cl-hint">Ăn đường phố, chợ phiên dễ lạ bụng</div></div></div>
+    <div class="cl-item" onclick="tick(this)" data-id="c12"><div class="cl-box"></div><div><div class="cl-tx">Thuốc cá nhân thường dùng</div><div class="cl-hint">Mang đủ — vùng hẻo lánh không có nhà thuốc</div></div></div>
+    <div class="cl-item" onclick="tick(this)" data-id="c13"><div class="cl-box"></div><div><div class="cl-tx">Pin dự phòng sạc điện thoại</div><div class="cl-hint">Đi xe máy cả ngày, ổ cắm homestay thường ít</div></div></div>
+    <div class="cl-item" onclick="tick(this)" data-id="c14"><div class="cl-box"></div><div><div class="cl-tx">Túi chống nước cho đồ điện tử</div><div class="cl-hint">Bảo vệ điện thoại, tiền nếu gặp mưa đột ngột</div></div></div>
+  </div>
+</div>
+
+<!-- NOTES -->
+<div class="wrap" id="notes">
+  <div class="s-label">Lưu ý</div>
+  <div class="s-title">Quan trọng cần nhớ</div>
+  <div class="s-sub">Đọc kỹ trước chuyến — đặc biệt phần an toàn lái xe đèo</div>
+  <div class="notes-cols">
+    <div class="note-block">
+      <h3>An toàn lái xe đèo núi</h3>
+      <ul>
+        <li>Đổ đầy xăng trước mỗi chặng — trạm xăng khu Đồng Văn–Lũng Cú rất thưa</li>
+        <li>Mặc mũ bảo hiểm và đồ bảo hộ đầy đủ mọi lúc</li>
+        <li>Không tự tin lái đèo → báo HDV để ngồi sau easy rider</li>
+        <li>Về homestay trước 17h — đổ đèo tối không đèn đường rất nguy hiểm</li>
+        <li>Ngày 3 dài nhất (~150km) — nghỉ giải lao ít nhất 15 phút mỗi 1,5h</li>
+        <li>Bấm còi liên tục ở cua khuất — đường hai chiều rất hẹp</li>
+      </ul>
+    </div>
+    <div class="note-block">
+      <h3>Ứng xử với văn hóa bản địa</h3>
+      <ul>
+        <li>Không vào sân / nhà dân khi chưa được mời hoặc xin phép</li>
+        <li>Xin phép trước khi chụp ảnh người dân, đặc biệt trẻ em tại chợ phiên</li>
+        <li>Không trả giá gắt — người bán phần lớn là đồng bào dân tộc</li>
+        <li>Mặc kín đáo khi vào bản làng và khu tâm linh</li>
+        <li>Chợ phiên Đồng Văn chỉ họp sáng Chủ Nhật — dậy trước 5h30</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<!-- COMMENTS -->
+<div class="wrap" id="comments">
+  <div class="s-label">Góp ý nhóm</div>
+  <div class="s-title">Nhắc nhở · Đề xuất · Câu hỏi</div>
+  <div class="s-sub">Dành cho cả nhóm — lưu trên trình duyệt của bạn</div>
+  <div class="cf-box">
+    <h3>Thêm góp ý</h3>
+    <input class="cf-in" type="text" id="cf-name" placeholder="Tên bạn" maxlength="40" />
+    <textarea class="cf-ta" id="cf-text" placeholder="Góp ý, nhắc nhở, câu hỏi..." maxlength="600"></textarea>
+    <div class="cf-footer">
+      <button class="btn" onclick="sendComment()">Gửi góp ý</button>
+      <span class="cf-err" id="cf-err"></span>
+    </div>
+  </div>
+  <div class="cm-list" id="cm-list">
+    <div class="no-cm" id="no-cm">Chưa có góp ý nào — hãy là người đầu tiên!</div>
+  </div>
+</div>
+
+<footer>
+  <p class="f-title">Hà Giang · Mùa Lúa Chín 2026</p>
+  <p>26/9 – 28/9/2026 · Nhóm 6 người · Khởi hành đêm 25/9</p>
+  <hr />
+  <p>Liên hệ trưởng nhóm · <a href="#">Link nhóm chat (cập nhật sau)</a></p>
+  <p style="margin-top:10px;opacity:.35;font-size:11px">Trang thông tin nội bộ nhóm · Không phải quảng cáo tour</p>
+</footer>
+
+<!-- Firebase SDK (compat v9) -->
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-database-compat.js"></script>
+
+<script>
+// ════════════════════════════════════════════════════
+//  ⚙️  FIREBASE CONFIG — paste config của bạn vào đây
+//  (Lấy từ Firebase Console → Project Settings → Your apps)
+// ════════════════════════════════════════════════════
+var FIREBASE_CONFIG = {
+  apiKey:            "AIzaSyCvDDz2ijexTRoJS10-9PKa7tRuCvo8x40",
+  authDomain:        "hagiang-2026.firebaseapp.com",
+  databaseURL:       "https://hagiang-2026-default-rtdb.asia-southeast1.firebasedatabase.app",
+  projectId:         "hagiang-2026",
+  storageBucket:     "hagiang-2026.firebasestorage.app",
+  messagingSenderId: "413685902613",
+  appId:             "1:413685902613:web:f76e0f22ae66f440940d1c"
+};
+// ════════════════════════════════════════════════════
+
+// Kiểm tra config đã được điền chưa
+var FB_READY = FIREBASE_CONFIG.apiKey !== 'PASTE_API_KEY_HERE';
+
+var db = null;
+var REF = {}; // Firebase refs
+
+if (FB_READY) {
+  try {
+    firebase.initializeApp(FIREBASE_CONFIG);
+    db = firebase.database();
+    REF.members  = db.ref('hagiang_2026/members');
+    REF.comments = db.ref('hagiang_2026/comments');
+    REF.mapLinks = db.ref('hagiang_2026/mapLinks');
+  } catch(e) {
+    console.error('Firebase init error:', e);
+    FB_READY = false;
+  }
+}
+
+// Banner thông báo nếu chưa config
+if (!FB_READY) {
+  var banner = document.createElement('div');
+  banner.id = 'fb-banner';
+  banner.style.cssText = 'position:fixed;bottom:0;left:0;right:0;z-index:9999;background:#1a3a6b;color:#fff;font-size:13px;padding:10px 20px;display:flex;align-items:center;justify-content:space-between;gap:12px;font-family:Tahoma,sans-serif';
+  banner.innerHTML = '<span>⚙️ <strong>Chế độ offline</strong> — Dữ liệu lưu trên máy bạn. Điền Firebase config vào file HTML để đồng bộ với cả nhóm.</span><button onclick="document.getElementById(\'fb-banner\').remove()" style="background:rgba(255,255,255,.2);border:none;color:#fff;border-radius:4px;padding:4px 10px;cursor:pointer;font-size:12px">Đóng</button>';
+  document.body.appendChild(banner);
+}
+
+// ── HELPER ──
+function esc(s){return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');}
+function fmtTime(){
+  var now=new Date();
+  return now.toLocaleDateString('vi-VN')+' '+now.toLocaleTimeString('vi-VN',{hour:'2-digit',minute:'2-digit'});
+}
+
+// ── COUNTDOWN ──
+(function(){
+  var t=new Date('2026-09-25T20:00:00+07:00').getTime();
+  function tick(){
+    var d=t-Date.now();
+    if(d<=0){['cdd','cdh','cdm','cds'].forEach(function(id){document.getElementById(id).textContent='0'});return;}
+    document.getElementById('cdd').textContent=Math.floor(d/86400000);
+    document.getElementById('cdh').textContent=String(Math.floor((d%86400000)/3600000)).padStart(2,'0');
+    document.getElementById('cdm').textContent=String(Math.floor((d%3600000)/60000)).padStart(2,'0');
+    document.getElementById('cds').textContent=String(Math.floor((d%60000)/1000)).padStart(2,'0');
+  }
+  tick();setInterval(tick,1000);
+})();
+
+// ── NAV SCROLL SPY ──
+(function(){
+  var secs=['overview','itinerary','cost','register','checklist','notes','comments'];
+  var links=document.querySelectorAll('.nav-inner a[data-sec]');
+  function update(){
+    var cur='';
+    secs.forEach(function(id){
+      var el=document.getElementById(id);
+      if(el&&el.getBoundingClientRect().top<=100)cur=id;
+    });
+    links.forEach(function(a){a.classList.toggle('active',a.getAttribute('data-sec')===cur);});
+  }
+  window.addEventListener('scroll',update,{passive:true});
+  update();
+})();
+
+// ── DAY TABS ──
+function switchDay(i,btn){
+  ['dp0','dp1','dp2','dp3'].forEach(function(id,idx){
+    var el=document.getElementById(id);
+    if(el)el.classList.toggle('on',idx===i);
+  });
+  document.querySelectorAll('.day-tab').forEach(function(b){b.classList.remove('on');});
+  btn.classList.add('on');
+}
+
+// ════════════════════════════════════════════════════
+//  MAP LINKS — đồng bộ Firebase, fallback localStorage
+// ════════════════════════════════════════════════════
+var mapCache = {};
+
+function initMapLinks() {
+  if (FB_READY) {
+    // Load từ Firebase, real-time
+    REF.mapLinks.on('value', function(snap) {
+      mapCache = snap.val() || {};
+      document.querySelectorAll('[data-mapkey]').forEach(function(el) {
+        var k = el.getAttribute('data-mapkey');
+        if (k && mapCache[k]) el.value = mapCache[k];
+      });
+    });
+  } else {
+    // Fallback localStorage
+    try { mapCache = JSON.parse(localStorage.getItem('hg_maps_2026')) || {}; } catch(e) {}
+    document.querySelectorAll('[data-mapkey]').forEach(function(el) {
+      var k = el.getAttribute('data-mapkey');
+      if (k && mapCache[k]) el.value = mapCache[k];
+    });
+  }
+}
+
+function saveMapLink(el) {
+  var k = el.getAttribute('data-mapkey');
+  if (!k) return;
+  var v = el.value;
+  mapCache[k] = v;
+  if (FB_READY) {
+    REF.mapLinks.child(k).set(v);
+  } else {
+    try { localStorage.setItem('hg_maps_2026', JSON.stringify(mapCache)); } catch(e) {}
+  }
+}
+
+function openMap(btn) {
+  var inp = btn.previousElementSibling;
+  var url = inp && inp.value.trim();
+  if (url) window.open(url, '_blank');
+}
+
+initMapLinks();
+
+// ════════════════════════════════════════════════════
+//  CHECKLIST — localStorage (cá nhân từng người)
+// ════════════════════════════════════════════════════
+var clData = {};
+try { clData = JSON.parse(localStorage.getItem('hg_cl_2026')) || {}; } catch(e) {}
+
+function tick(el) {
+  el.classList.toggle('done');
+  clData[el.getAttribute('data-id')] = el.classList.contains('done');
+  try { localStorage.setItem('hg_cl_2026', JSON.stringify(clData)); } catch(e) {}
+  updateCl();
+}
+function updateCl() {
+  var items = document.querySelectorAll('.cl-item');
+  var done  = document.querySelectorAll('.cl-item.done').length;
+  var pct   = items.length ? Math.round(done / items.length * 100) : 0;
+  document.getElementById('cl-bar').style.width = pct + '%';
+  document.getElementById('cl-txt').textContent = done + '/' + items.length + ' mục đã chuẩn bị (' + pct + '%)';
+}
+(function() {
+  document.querySelectorAll('.cl-item').forEach(function(el) {
+    if (clData[el.getAttribute('data-id')]) el.classList.add('done');
+  });
+  updateCl();
+})();
+
+// ════════════════════════════════════════════════════
+//  REGISTRATION — Firebase real-time
+// ════════════════════════════════════════════════════
+
+// Render danh sách thành viên từ snapshot Firebase
+function renderMembersFromSnap(snap) {
+  var el    = document.getElementById('m-list');
+  var noEl  = document.getElementById('no-members');
+  var count = document.getElementById('m-count');
+  if (!snap || !snap.val()) {
+    count.textContent = '0';
+    noEl.style.display = 'block';
+    el.innerHTML = '';
+    el.appendChild(noEl);
+    return;
+  }
+  var data = snap.val();
+  var keys = Object.keys(data);
+  count.textContent = keys.length;
+  noEl.style.display = 'none';
+  el.innerHTML = '';
+  keys.forEach(function(k, i) {
+    var m   = data[k];
+    var div = document.createElement('div');
+    div.className = 'member-item';
+    var badge = m.license === 'yes'
+      ? '<span class="m-badge badge-ok">Tự lái</span>'
+      : '<span class="m-badge badge-no">Ngồi sau</span>';
+    div.innerHTML =
+      '<div class="m-num">' + (i + 1) + '</div>' +
+      '<div style="flex:1"><div class="m-name">' + esc(m.name) + badge + '</div>' +
+      '<div class="m-info">' + (m.phone ? '📞 ' + esc(m.phone) : '') + (m.note ? ' · ' + esc(m.note) : '') + '</div></div>' +
+      '<button class="m-del" onclick="deleteMember(\'' + k + '\')" title="Xoá">✕</button>';
+    el.appendChild(div);
+  });
+}
+
+// Render fallback từ localStorage
+function renderMembersLocal() {
+  var list = [];
+  try { list = JSON.parse(localStorage.getItem('hg_members_2026')) || []; } catch(e) {}
+  var el   = document.getElementById('m-list');
+  var noEl = document.getElementById('no-members');
+  document.getElementById('m-count').textContent = list.length;
+  if (!list.length) { noEl.style.display = 'block'; el.innerHTML = ''; el.appendChild(noEl); return; }
+  noEl.style.display = 'none'; el.innerHTML = '';
+  list.forEach(function(m, i) {
+    var div = document.createElement('div');
+    div.className = 'member-item';
+    var badge = m.license === 'yes'
+      ? '<span class="m-badge badge-ok">Tự lái</span>'
+      : '<span class="m-badge badge-no">Ngồi sau</span>';
+    div.innerHTML =
+      '<div class="m-num">' + (i + 1) + '</div>' +
+      '<div style="flex:1"><div class="m-name">' + esc(m.name) + badge + '</div>' +
+      '<div class="m-info">' + (m.phone ? '📞 ' + esc(m.phone) : '') + (m.note ? ' · ' + esc(m.note) : '') + '</div></div>' +
+      '<button class="m-del" onclick="deleteMemberLocal(' + i + ')" title="Xoá">✕</button>';
+    el.appendChild(div);
+  });
+}
+
+function addMember() {
+  var name    = document.getElementById('rg-name').value.trim();
+  var phone   = document.getElementById('rg-phone').value.trim();
+  var license = document.querySelector('input[name="rg-license"]:checked').value;
+  var note    = document.getElementById('rg-note').value.trim();
+  var err     = document.getElementById('rg-err');
+  if (!name) { err.textContent = 'Vui lòng nhập tên.'; return; }
+  err.textContent = '';
+  var member = { name: name, phone: phone, license: license, note: note, ts: Date.now() };
+  if (FB_READY) {
+    REF.members.push(member)
+      .then(function() {
+        document.getElementById('rg-name').value = '';
+        document.getElementById('rg-phone').value = '';
+        document.getElementById('rg-note').value = '';
+        document.querySelector('input[name="rg-license"][value="yes"]').checked = true;
+      })
+      .catch(function(e) { err.textContent = 'Lỗi lưu dữ liệu: ' + e.message; });
+  } else {
+    var list = [];
+    try { list = JSON.parse(localStorage.getItem('hg_members_2026')) || []; } catch(e) {}
+    list.push(member);
+    try { localStorage.setItem('hg_members_2026', JSON.stringify(list)); } catch(e) {}
+    document.getElementById('rg-name').value = '';
+    document.getElementById('rg-phone').value = '';
+    document.getElementById('rg-note').value = '';
+    document.querySelector('input[name="rg-license"][value="yes"]').checked = true;
+    renderMembersLocal();
+  }
+}
+
+function deleteMember(firebaseKey) {
+  if (!confirm('Xoá thành viên này?')) return;
+  REF.members.child(firebaseKey).remove()
+    .catch(function(e) { alert('Lỗi xoá: ' + e.message); });
+}
+
+function deleteMemberLocal(i) {
+  if (!confirm('Xoá thành viên này?')) return;
+  var list = [];
+  try { list = JSON.parse(localStorage.getItem('hg_members_2026')) || []; } catch(e) {}
+  list.splice(i, 1);
+  try { localStorage.setItem('hg_members_2026', JSON.stringify(list)); } catch(e) {}
+  renderMembersLocal();
+}
+
+// Khởi tạo listeners
+if (FB_READY) {
+  REF.members.on('value', function(snap) { renderMembersFromSnap(snap); });
+} else {
+  renderMembersLocal();
+}
+
+// ════════════════════════════════════════════════════
+//  COMMENTS — Firebase real-time
+// ════════════════════════════════════════════════════
+
+function buildCommentEl(c) {
+  var d = document.createElement('div');
+  d.className = 'cm';
+  d.innerHTML =
+    '<div class="cm-av">' + esc(c.name.charAt(0).toUpperCase()) + '</div>' +
+    '<div><div class="cm-name">' + esc(c.name) + '</div>' +
+    '<div class="cm-time">' + esc(c.time) + '</div>' +
+    '<div class="cm-text">' + esc(c.text) + '</div></div>';
+  return d;
+}
+
+function renderCommentsFromSnap(snap) {
+  var el  = document.getElementById('cm-list');
+  var noEl= document.getElementById('no-cm');
+  if (!snap || !snap.val()) {
+    noEl.style.display = 'block'; el.innerHTML = ''; el.appendChild(noEl); return;
+  }
+  var data = snap.val();
+  var arr  = Object.values(data).sort(function(a,b){ return b.ts - a.ts; });
+  noEl.style.display = 'none'; el.innerHTML = '';
+  arr.forEach(function(c) { el.appendChild(buildCommentEl(c)); });
+}
+
+function renderCommentsLocal() {
+  var list = [];
+  try { list = JSON.parse(localStorage.getItem('hg_cm_2026')) || []; } catch(e) {}
+  var el  = document.getElementById('cm-list');
+  var noEl= document.getElementById('no-cm');
+  if (!list.length) { noEl.style.display = 'block'; el.innerHTML = ''; el.appendChild(noEl); return; }
+  noEl.style.display = 'none'; el.innerHTML = '';
+  list.forEach(function(c) { el.appendChild(buildCommentEl(c)); });
+}
+
+function sendComment() {
+  var n   = document.getElementById('cf-name').value.trim();
+  var t   = document.getElementById('cf-text').value.trim();
+  var err = document.getElementById('cf-err');
+  if (!n) { err.textContent = 'Vui lòng nhập tên.'; return; }
+  if (!t) { err.textContent = 'Vui lòng nhập nội dung.'; return; }
+  err.textContent = '';
+  var comment = { name: n, text: t, time: fmtTime(), ts: Date.now() };
+  if (FB_READY) {
+    REF.comments.push(comment)
+      .then(function() {
+        document.getElementById('cf-name').value = '';
+        document.getElementById('cf-text').value = '';
+      })
+      .catch(function(e) { err.textContent = 'Lỗi gửi: ' + e.message; });
+  } else {
+    var list = [];
+    try { list = JSON.parse(localStorage.getItem('hg_cm_2026')) || []; } catch(e) {}
+    list.unshift(comment);
+    try { localStorage.setItem('hg_cm_2026', JSON.stringify(list)); } catch(e) {}
+    document.getElementById('cf-name').value = '';
+    document.getElementById('cf-text').value = '';
+    renderCommentsLocal();
+  }
+}
+
+if (FB_READY) {
+  REF.comments.on('value', function(snap) { renderCommentsFromSnap(snap); });
+} else {
+  renderCommentsLocal();
+}
+</script>
+</body>
+</html>
