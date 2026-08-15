@@ -181,6 +181,17 @@ body{font-family:Tahoma,Arial,sans-serif;background:var(--bg);color:var(--text);
 .fg{display:flex;flex-direction:column;gap:5px}
 .fg label{font-size:12px;color:var(--text3);font-weight:bold;letter-spacing:.3px}
 .fg input,.fg select,.fg textarea{font-family:Tahoma,sans-serif;font-size:14px;border:1px solid var(--border);border-radius:6px;padding:8px 12px;background:var(--bg);color:var(--text);outline:none;transition:border-color .15s;width:100%}
+.fg select{appearance:none;-webkit-appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%239a8c70' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 12px center;padding-right:32px}
+/* bike pair cards */
+.bike-pair{background:var(--card);border:1px solid var(--border);border-radius:var(--r);padding:14px 18px;display:flex;align-items:center;gap:14px}
+.bike-num{width:32px;height:32px;border-radius:50%;background:linear-gradient(135deg,var(--forest),var(--green));color:#fff;font-weight:bold;font-size:13px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.bike-members{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.bike-person{font-size:14px;color:var(--text);display:flex;align-items:center;gap:5px}
+.bike-person .role{font-size:11px;padding:2px 7px;border-radius:10px;font-weight:bold}
+.role-driver{background:#e8f5e0;color:#3a7020}
+.role-passenger{background:#fef0e0;color:#a06020}
+.bike-sep{color:var(--text3);font-size:18px;font-weight:bold}
+.bike-tbd{font-size:13px;color:var(--text3);font-style:italic}
 .fg input:focus,.fg select:focus,.fg textarea:focus{border-color:var(--green)}
 .fg.full{grid-column:1/-1}
 .radio-row{display:flex;gap:16px;align-items:center;padding:8px 0}
@@ -921,6 +932,13 @@ footer hr{opacity:.15;margin:16px auto;max-width:80px;border:none;border-top:1px
         </div>
       </div>
       <div class="fg">
+        <label>Ghép xe máy với ai?</label>
+        <select id="rg-pair">
+          <option value="">— Chưa xác định —</option>
+        </select>
+        <span style="font-size:11px;color:var(--text3);margin-top:3px">Chọn người đi chung xe · 2 người / xe Wave</span>
+      </div>
+      <div class="fg full">
         <label>Thực phẩm dị ứng / yêu cầu khác</label>
         <input type="text" id="rg-note" placeholder="Ví dụ: không ăn được đồ cay, dị ứng hải sản..." maxlength="100" />
       </div>
@@ -930,9 +948,20 @@ footer hr{opacity:.15;margin:16px auto;max-width:80px;border:none;border-top:1px
   </div>
 
   <div id="members-wrap">
-    <div style="font-size:13px;font-weight:bold;color:var(--text2);margin-bottom:12px;letter-spacing:.3px">DANH SÁCH THÀNH VIÊN (<span id="m-count">0</span> người)</div>
+    <div style="font-size:13px;font-weight:bold;color:var(--text2);margin-bottom:12px;letter-spacing:.3px">
+      DANH SÁCH THÀNH VIÊN (<span id="m-count">0</span> người)
+    </div>
     <div class="members-list" id="m-list">
       <div class="no-members" id="no-members">Chưa có ai đăng ký. Hãy là người đầu tiên!</div>
+    </div>
+
+    <!-- PHÂN XE -->
+    <div id="bike-section" style="margin-top:28px;display:none">
+      <div style="font-size:13px;font-weight:bold;color:var(--text2);margin-bottom:12px;letter-spacing:.3px">
+        PHÂN CHIA XE MÁY
+      </div>
+      <div id="bike-pairs" style="display:flex;flex-direction:column;gap:10px"></div>
+      <div id="bike-unpaired" style="margin-top:10px"></div>
     </div>
   </div>
 </div>
@@ -1200,61 +1229,155 @@ function updateCl() {
 //  REGISTRATION — Firebase real-time
 // ════════════════════════════════════════════════════
 
-// Render danh sách thành viên từ snapshot Firebase
+// Cache snapshot data toàn cục để dùng cho dropdown + bike pairs
+var membersCache = {}; // { firebaseKey: memberObj }
+
+// Cập nhật dropdown "Ghép xe với" khi danh sách thành viên thay đổi
+function updatePairDropdown(data) {
+  var sel = document.getElementById('rg-pair');
+  var prev = sel.value;
+  sel.innerHTML = '<option value="">— Chưa xác định —</option>';
+  Object.keys(data || {}).forEach(function(k) {
+    var m = data[k];
+    var opt = document.createElement('option');
+    opt.value = k;
+    opt.textContent = m.name + (m.license === 'yes' ? ' (Tự lái)' : ' (Ngồi sau)');
+    sel.appendChild(opt);
+  });
+  if (prev) sel.value = prev;
+}
+
+// Build HTML một member-item
+function buildMemberEl(k, m, idx, isFirebase) {
+  var div = document.createElement('div');
+  div.className = 'member-item';
+  var badge = m.license === 'yes'
+    ? '<span class="m-badge badge-ok">Tự lái</span>'
+    : '<span class="m-badge badge-no">Ngồi sau</span>';
+  var pairText = m.pairName ? '🏍 Ghép xe với <strong>' + esc(m.pairName) + '</strong>' : '';
+  var delFn = isFirebase
+    ? 'deleteMember(\'' + k + '\')'
+    : 'deleteMemberLocal(' + idx + ')';
+  var info = [
+    m.phone ? '📞 ' + esc(m.phone) : '',
+    m.note  ? '📝 ' + esc(m.note)  : '',
+    pairText
+  ].filter(Boolean).join(' &nbsp;·&nbsp; ');
+  div.innerHTML =
+    '<div class="m-num">' + (idx + 1) + '</div>' +
+    '<div style="flex:1">' +
+      '<div class="m-name">' + esc(m.name) + badge + '</div>' +
+      (info ? '<div class="m-info" style="margin-top:3px">' + info + '</div>' : '') +
+    '</div>' +
+    '<button class="m-del" onclick="' + delFn + '" title="Xoá">✕</button>';
+  return div;
+}
+
+// Render bike-pairs section
+function renderBikePairs(data) {
+  var section   = document.getElementById('bike-section');
+  var pairsEl   = document.getElementById('bike-pairs');
+  var unpairedEl= document.getElementById('bike-unpaired');
+  pairsEl.innerHTML = '';
+  unpairedEl.innerHTML = '';
+
+  if (!data || !Object.keys(data).length) { section.style.display = 'none'; return; }
+  section.style.display = 'block';
+
+  var keys   = Object.keys(data);
+  var paired = new Set(); // keys đã được ghép cặp hiển thị
+  var bikeNo = 1;
+
+  // Tìm các cặp rõ ràng (A pair với B và B pair với A, hoặc A khai pair B)
+  keys.forEach(function(k) {
+    if (paired.has(k)) return;
+    var m = data[k];
+    if (!m.pairKey) return;
+    // Có khai cặp
+    paired.add(k);
+    paired.add(m.pairKey);
+    var partner = data[m.pairKey];
+    var card = document.createElement('div');
+    card.className = 'bike-pair';
+    var p1driver = m.license === 'yes';
+    var p2driver = partner ? partner.license === 'yes' : false;
+    card.innerHTML =
+      '<div class="bike-num">Xe ' + bikeNo + '</div>' +
+      '<div class="bike-members">' +
+        '<div class="bike-person">' +
+          esc(m.name) + ' <span class="role ' + (p1driver ? 'role-driver' : 'role-passenger') + '">' + (p1driver ? 'Lái' : 'Ngồi sau') + '</span>' +
+        '</div>' +
+        '<div class="bike-sep">+</div>' +
+        (partner
+          ? '<div class="bike-person">' + esc(partner.name) + ' <span class="role ' + (p2driver ? 'role-driver' : 'role-passenger') + '">' + (p2driver ? 'Lái' : 'Ngồi sau') + '</span></div>'
+          : '<div class="bike-tbd">Chưa xác định bạn cùng xe</div>') +
+      '</div>';
+    pairsEl.appendChild(card);
+    bikeNo++;
+  });
+
+  // Những người chưa ghép cặp
+  var unpaired = keys.filter(function(k) { return !paired.has(k); });
+  if (unpaired.length) {
+    var wrap = document.createElement('div');
+    wrap.style.cssText = 'background:var(--stone);border:1px dashed var(--border);border-radius:var(--r);padding:14px 18px';
+    wrap.innerHTML = '<div style="font-size:12px;font-weight:bold;color:var(--amber);letter-spacing:.5px;margin-bottom:10px">CHƯA GHÉP XE (' + unpaired.length + ' người)</div>';
+    unpaired.forEach(function(k) {
+      var m = data[k];
+      var row = document.createElement('div');
+      row.style.cssText = 'font-size:13px;color:var(--text2);padding:4px 0;display:flex;align-items:center;gap:8px';
+      row.innerHTML = '• <strong>' + esc(m.name) + '</strong> <span style="color:var(--text3)">(' + (m.license === 'yes' ? 'Tự lái' : 'Ngồi sau') + ')</span>';
+      wrap.appendChild(row);
+    });
+    unpairedEl.appendChild(wrap);
+  }
+}
+
+// Render toàn bộ từ Firebase snapshot
 function renderMembersFromSnap(snap) {
   var el    = document.getElementById('m-list');
   var noEl  = document.getElementById('no-members');
   var count = document.getElementById('m-count');
-  if (!snap || !snap.val()) {
+  var data  = (snap && snap.val()) ? snap.val() : null;
+  membersCache = data || {};
+
+  updatePairDropdown(data);
+
+  if (!data) {
     count.textContent = '0';
     noEl.style.display = 'block';
     el.innerHTML = '';
     el.appendChild(noEl);
+    renderBikePairs(null);
     return;
   }
-  var data = snap.val();
   var keys = Object.keys(data);
   count.textContent = keys.length;
   noEl.style.display = 'none';
   el.innerHTML = '';
   keys.forEach(function(k, i) {
-    var m   = data[k];
-    var div = document.createElement('div');
-    div.className = 'member-item';
-    var badge = m.license === 'yes'
-      ? '<span class="m-badge badge-ok">Tự lái</span>'
-      : '<span class="m-badge badge-no">Ngồi sau</span>';
-    div.innerHTML =
-      '<div class="m-num">' + (i + 1) + '</div>' +
-      '<div style="flex:1"><div class="m-name">' + esc(m.name) + badge + '</div>' +
-      '<div class="m-info">' + (m.phone ? '📞 ' + esc(m.phone) : '') + (m.note ? ' · ' + esc(m.note) : '') + '</div></div>' +
-      '<button class="m-del" onclick="deleteMember(\'' + k + '\')" title="Xoá">✕</button>';
-    el.appendChild(div);
+    el.appendChild(buildMemberEl(k, data[k], i, true));
   });
+  renderBikePairs(data);
 }
 
-// Render fallback từ localStorage
+// Render fallback localStorage
 function renderMembersLocal() {
   var list = [];
   try { list = JSON.parse(localStorage.getItem('hg_members_2026')) || []; } catch(e) {}
   var el   = document.getElementById('m-list');
   var noEl = document.getElementById('no-members');
   document.getElementById('m-count').textContent = list.length;
-  if (!list.length) { noEl.style.display = 'block'; el.innerHTML = ''; el.appendChild(noEl); return; }
+
+  // Build fake keyed object for pair dropdown
+  var fakeData = {};
+  list.forEach(function(m, i) { fakeData['local_' + i] = m; });
+  updatePairDropdown(fakeData);
+
+  if (!list.length) { noEl.style.display = 'block'; el.innerHTML = ''; el.appendChild(noEl); renderBikePairs(null); return; }
   noEl.style.display = 'none'; el.innerHTML = '';
-  list.forEach(function(m, i) {
-    var div = document.createElement('div');
-    div.className = 'member-item';
-    var badge = m.license === 'yes'
-      ? '<span class="m-badge badge-ok">Tự lái</span>'
-      : '<span class="m-badge badge-no">Ngồi sau</span>';
-    div.innerHTML =
-      '<div class="m-num">' + (i + 1) + '</div>' +
-      '<div style="flex:1"><div class="m-name">' + esc(m.name) + badge + '</div>' +
-      '<div class="m-info">' + (m.phone ? '📞 ' + esc(m.phone) : '') + (m.note ? ' · ' + esc(m.note) : '') + '</div></div>' +
-      '<button class="m-del" onclick="deleteMemberLocal(' + i + ')" title="Xoá">✕</button>';
-    el.appendChild(div);
-  });
+  list.forEach(function(m, i) { el.appendChild(buildMemberEl('local_' + i, m, i, false)); });
+  renderBikePairs(fakeData);
 }
 
 function addMember() {
@@ -1262,34 +1385,51 @@ function addMember() {
   var phone   = document.getElementById('rg-phone').value.trim();
   var license = document.querySelector('input[name="rg-license"]:checked').value;
   var note    = document.getElementById('rg-note').value.trim();
+  var pairSel = document.getElementById('rg-pair');
+  var pairKey = pairSel.value;
+  var pairName= pairKey ? (pairSel.options[pairSel.selectedIndex].textContent.split(' (')[0]) : '';
   var err     = document.getElementById('rg-err');
   if (!name) { err.textContent = 'Vui lòng nhập tên.'; return; }
   err.textContent = '';
-  var member = { name: name, phone: phone, license: license, note: note, ts: Date.now() };
+
+  var member = { name: name, phone: phone, license: license, note: note,
+                 pairKey: pairKey, pairName: pairName, ts: Date.now() };
+
+  function resetForm() {
+    document.getElementById('rg-name').value = '';
+    document.getElementById('rg-phone').value = '';
+    document.getElementById('rg-note').value = '';
+    document.getElementById('rg-pair').value = '';
+    document.querySelector('input[name="rg-license"][value="yes"]').checked = true;
+  }
+
   if (FB_READY) {
     REF.members.push(member)
-      .then(function() {
-        document.getElementById('rg-name').value = '';
-        document.getElementById('rg-phone').value = '';
-        document.getElementById('rg-note').value = '';
-        document.querySelector('input[name="rg-license"][value="yes"]').checked = true;
+      .then(function(ref) {
+        // Nếu cặp khai pairKey, cập nhật pairName ngược lại cho partner
+        if (pairKey && membersCache[pairKey]) {
+          REF.members.child(pairKey).update({ pairKey: ref.key, pairName: name });
+        }
+        resetForm();
       })
-      .catch(function(e) { err.textContent = 'Lỗi lưu dữ liệu: ' + e.message; });
+      .catch(function(e) { err.textContent = 'Lỗi: ' + e.message; });
   } else {
     var list = [];
     try { list = JSON.parse(localStorage.getItem('hg_members_2026')) || []; } catch(e) {}
     list.push(member);
     try { localStorage.setItem('hg_members_2026', JSON.stringify(list)); } catch(e) {}
-    document.getElementById('rg-name').value = '';
-    document.getElementById('rg-phone').value = '';
-    document.getElementById('rg-note').value = '';
-    document.querySelector('input[name="rg-license"][value="yes"]').checked = true;
+    resetForm();
     renderMembersLocal();
   }
 }
 
 function deleteMember(firebaseKey) {
   if (!confirm('Xoá thành viên này?')) return;
+  // Xoá liên kết ghép xe của partner nếu có
+  var m = membersCache[firebaseKey];
+  if (m && m.pairKey && membersCache[m.pairKey]) {
+    REF.members.child(m.pairKey).update({ pairKey: '', pairName: '' });
+  }
   REF.members.child(firebaseKey).remove()
     .catch(function(e) { alert('Lỗi xoá: ' + e.message); });
 }
