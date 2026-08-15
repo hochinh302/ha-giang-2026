@@ -953,6 +953,7 @@ footer hr{opacity:.15;margin:16px auto;max-width:80px;border:none;border-top:1px
     </div>
     <div class="members-list" id="m-list">
       <div class="no-members" id="no-members">Chưa có ai đăng ký. Hãy là người đầu tiên!</div>
+      <div id="m-items"></div>
     </div>
 
     <!-- PHÂN XE -->
@@ -1335,28 +1336,26 @@ function renderBikePairs(data) {
 
 // Render toàn bộ từ Firebase snapshot
 function renderMembersFromSnap(snap) {
-  var el    = document.getElementById('m-list');
+  var items = document.getElementById('m-items');
   var noEl  = document.getElementById('no-members');
   var count = document.getElementById('m-count');
   var data  = (snap && snap.val()) ? snap.val() : null;
   membersCache = data || {};
 
   updatePairDropdown(data);
+  items.innerHTML = '';
 
   if (!data) {
     count.textContent = '0';
     noEl.style.display = 'block';
-    el.innerHTML = '';
-    el.appendChild(noEl);
     renderBikePairs(null);
     return;
   }
   var keys = Object.keys(data);
   count.textContent = keys.length;
   noEl.style.display = 'none';
-  el.innerHTML = '';
   keys.forEach(function(k, i) {
-    el.appendChild(buildMemberEl(k, data[k], i, true));
+    items.appendChild(buildMemberEl(k, data[k], i, true));
   });
   renderBikePairs(data);
 }
@@ -1365,18 +1364,18 @@ function renderMembersFromSnap(snap) {
 function renderMembersLocal() {
   var list = [];
   try { list = JSON.parse(localStorage.getItem('hg_members_2026')) || []; } catch(e) {}
-  var el   = document.getElementById('m-list');
-  var noEl = document.getElementById('no-members');
+  var items = document.getElementById('m-items');
+  var noEl  = document.getElementById('no-members');
   document.getElementById('m-count').textContent = list.length;
+  items.innerHTML = '';
 
-  // Build fake keyed object for pair dropdown
   var fakeData = {};
   list.forEach(function(m, i) { fakeData['local_' + i] = m; });
   updatePairDropdown(fakeData);
 
-  if (!list.length) { noEl.style.display = 'block'; el.innerHTML = ''; el.appendChild(noEl); renderBikePairs(null); return; }
-  noEl.style.display = 'none'; el.innerHTML = '';
-  list.forEach(function(m, i) { el.appendChild(buildMemberEl('local_' + i, m, i, false)); });
+  if (!list.length) { noEl.style.display = 'block'; renderBikePairs(null); return; }
+  noEl.style.display = 'none';
+  list.forEach(function(m, i) { items.appendChild(buildMemberEl('local_' + i, m, i, false)); });
   renderBikePairs(fakeData);
 }
 
